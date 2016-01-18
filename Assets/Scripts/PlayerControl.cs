@@ -31,12 +31,17 @@ public class PlayerControl : MonoBehaviour
     //private Animator anim;				// Reference to the player's animator component.
     private float sunExposure = 100f;
     private bool inShade;
+    private bool sunscreen;
     public float melatonin = 0.0f;
     public Image sunBar;
+    public Image sunScreenTimer;
+    private LayerMask shadeLayer;
 
     void Awake()
     {
         inShade = false;
+        sunscreen = false;
+        shadeLayer = LayerMask.GetMask("Shade");
         // Setting up references.
         Canvas canvas = FindObjectOfType<Canvas>();
         inGameMenu = canvas.GetComponent<MainMenuController>();
@@ -58,7 +63,8 @@ public class PlayerControl : MonoBehaviour
             if (inGameMenu.menuOpen)
             {
                 inGameMenu.OnInGameMenuClose();
-            } else
+            }
+            else
                 inGameMenu.OnInGameMenuOpen();
         }
 
@@ -146,17 +152,38 @@ public class PlayerControl : MonoBehaviour
     }
     void SunDamage()
     {
-        Debug.Log("Checking Sun");
-        inShade = triggerCollider.IsTouchingLayers(1 << 13);
-        if (!inShade || melatonin > 0)
+        inShade = triggerCollider.IsTouchingLayers(shadeLayer);
+        if (!inShade & melatonin <= 0 )
         {
-            Debug.Log("Sun Damage");
             sunExposure -= 4;
             // find out how to use layer mask to make the inshade bool
+        } else
+        {
+            sunExposure += 12;
         }
+        sunExposure = Mathf.Clamp(sunExposure, -1, 100.0f);
         sunBar.fillAmount = sunExposure / 100.0f;
     }
-
+    void SunscreenCounter()
+    {
+        melatonin -= 1;
+        sunScreenTimer.fillAmount = melatonin / 100.0f;
+        Mathf.Clamp(melatonin, 0, 100);
+        if (melatonin == 0)
+        {
+            CancelInvoke("SunscreenCounter");
+            sunscreen = false;
+        }
+    }
+    public void SunscreenApply()
+    {
+        melatonin = 100;
+        if (!sunscreen)
+        {
+            InvokeRepeating("SunscreenCounter", 0.0f, 0.2f);
+            sunscreen = true;
+        }
+    }
 }
 //	public IEnumerator Taunt()
 //	{
