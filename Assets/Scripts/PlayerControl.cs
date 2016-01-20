@@ -36,20 +36,16 @@ public class PlayerControl : MonoBehaviour
     public Image sunBar;
     public Image sunScreenTimer;
     private LayerMask shadeLayer;
-    private CircleCollider2D charBottom;
-    private LayerMask groundLayer;
 
     void Awake()
     {
         inShade = false;
         sunscreen = false;
         shadeLayer = LayerMask.GetMask("Shade");
-        groundLayer = LayerMask.GetMask("Ground");
         // Setting up references.
         Canvas canvas = FindObjectOfType<Canvas>();
         inGameMenu = canvas.GetComponent<MainMenuController>();
         levelController = levelControlGO.GetComponent<LevelController>();
-        charBottom = gameObject.GetComponent<CircleCollider2D>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         groundCheck = transform.Find("GroundCheck");
         wallCheck = wallGOCheck.transform;
@@ -57,6 +53,7 @@ public class PlayerControl : MonoBehaviour
         if (levelController.sunny)
             InvokeRepeating("SunDamage", 5, 1);
     }
+
 
     void Update()
     {
@@ -72,8 +69,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-        //grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-        
+        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
         walled = Physics2D.Linecast(transform.position, wallCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
         // If the jump button is pressed and the player is grounded then the player should jump.
@@ -83,7 +79,6 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
-        grounded = charBottom.IsTouchingLayers(groundLayer);
         // Cache the horizontal input.
         float h = Input.GetAxis("Horizontal");
 
@@ -136,7 +131,7 @@ public class PlayerControl : MonoBehaviour
             //AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
 
             // Add a vertical force to the player.
-            rb.AddForce(new Vector2(0.0f, jumpForce));
+            rb.AddForce(new Vector2(0f, jumpForce));
 
             // Make sure the player can't jump again until the jump conditions from Update are satisfied.
             jump = false;
