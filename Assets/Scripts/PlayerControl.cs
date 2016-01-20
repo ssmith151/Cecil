@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerControl : MonoBehaviour
@@ -8,7 +9,8 @@ public class PlayerControl : MonoBehaviour
     [HideInInspector]
     public bool jump = false;               // Condition for whether the player should jump.
     public GameObject wallGOCheck;          // GameObject to collect the reference to get transform, for walls ya know
-
+    public GameObject levelControlGO;
+    public Collider2D triggerCollider;
     public float moveForce = 365f;          // Amount of force added to move the player left and right.
     public float maxSpeed = 5f;             // The fastest the player can travel in the x axis.
                                             //public AudioClip[] jumpClips;			// Array of clips for when the player jumps.
@@ -16,27 +18,40 @@ public class PlayerControl : MonoBehaviour
                                             //public AudioClip[] taunts;				// Array of clips for when the player taunts.
                                             //public float tauntProbability = 50f;	// Chance of a taunt happening.
                                             //public float tauntDelay = 1f;			// Delay for when the taunt should happen.
-    private MainMenuController inGameMenu;   //reference to the main menu controller on canvas
+    private MainMenuController inGameMenu;  //reference to the main menu controller on canvas
+    private LevelController levelController;
 
-
-    //private int tauntIndex;					// The index of the taunts array indicating the most recent taunt.
+    //private int tauntIndex;				// The index of the taunts array indicating the most recent taunt.
     private Transform groundCheck;          // A position marking where to check if the player is grounded.
     private Transform wallCheck;            // Position marking the front of the player to check for walls
-    public bool grounded = false;          // Whether or not the player is grounded.
-    public bool walled = false;            // Ya know, walls and shit
-    private Rigidbody2D rb;                     // Unity 5.0 Correction reference            
+    public bool grounded = false;           // Whether or not the player is grounded.
+    public bool walled = false;             // Ya know, walls and shit
+    private Rigidbody2D rb;                 // Unity 5.0 Correction reference            
     private float samePositionY;            // sets a float every fixed update to keep character falling on a wall
-    //private Animator anim;					// Reference to the player's animator component.
+    //private Animator anim;				// Reference to the player's animator component.
+    private float sunExposure = 100f;
+    private bool inShade;
+    private bool sunscreen;
+    public float melatonin = 0.0f;
+    public Image sunBar;
+    public Image sunScreenTimer;
+    private LayerMask shadeLayer;
 
     void Awake()
     {
+        inShade = false;
+        sunscreen = false;
+        shadeLayer = LayerMask.GetMask("Shade");
         // Setting up references.
         Canvas canvas = FindObjectOfType<Canvas>();
         inGameMenu = canvas.GetComponent<MainMenuController>();
+        levelController = levelControlGO.GetComponent<LevelController>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         groundCheck = transform.Find("GroundCheck");
         wallCheck = wallGOCheck.transform;
         //anim = GetComponent<Animator>();
+        if (levelController.sunny)
+            InvokeRepeating("SunDamage", 5, 1);
     }
 
 
@@ -48,7 +63,8 @@ public class PlayerControl : MonoBehaviour
             if (inGameMenu.menuOpen)
             {
                 inGameMenu.OnInGameMenuClose();
-            } else
+            }
+            else
                 inGameMenu.OnInGameMenuOpen();
         }
 
@@ -134,7 +150,40 @@ public class PlayerControl : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
-
+    void SunDamage()
+    {
+        inShade = triggerCollider.IsTouchingLayers(shadeLayer);
+        if (!inShade & melatonin <= 0 )
+        {
+            sunExposure -= 4;
+            // find out how to use layer mask to make the inshade bool
+        } else
+        {
+            sunExposure += 12;
+        }
+        sunExposure = Mathf.Clamp(sunExposure, -1, 100.0f);
+        sunBar.fillAmount = sunExposure / 100.0f;
+    }
+    void SunscreenCounter()
+    {
+        melatonin -= 1;
+        sunScreenTimer.fillAmount = melatonin / 100.0f;
+        Mathf.Clamp(melatonin, 0, 100);
+        if (melatonin == 0)
+        {
+            CancelInvoke("SunscreenCounter");
+            sunscreen = false;
+        }
+    }
+    public void SunscreenApply()
+    {
+        melatonin = 100;
+        if (!sunscreen)
+        {
+            InvokeRepeating("SunscreenCounter", 0.0f, 0.2f);
+            sunscreen = true;
+        }
+    }
 }
 //	public IEnumerator Taunt()
 //	{
