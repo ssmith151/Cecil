@@ -42,6 +42,7 @@ public class PlayerControl : MonoBehaviour
     private bool groundClose;
     public bool groundthrust;
     private bool groundedLastFrame;
+    public SpriteRenderer characterRender;
 
     void Awake()
     {
@@ -57,6 +58,7 @@ public class PlayerControl : MonoBehaviour
         levelController = levelControlGO.GetComponent<LevelController>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         groundCheck = transform.Find("GroundCheck");
+        //characterRender = gameObject.GetComponent<SpriteRenderer>();
         wallCheck = wallGOCheck.transform;
         //anim = GetComponent<Animator>();
         if (levelController.sunny)
@@ -190,6 +192,7 @@ public class PlayerControl : MonoBehaviour
         }
         sunExposure = Mathf.Clamp(sunExposure, -1, 100.0f);
         sunBar.fillAmount = sunExposure / 100.0f;
+        characterRender.material.color = Color.Lerp(Color.red, Color.white, (sunExposure / 100.0f));
     }
     void SunscreenCounter()
     {
