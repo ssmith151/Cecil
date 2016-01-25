@@ -43,6 +43,7 @@ public class PlayerControl : MonoBehaviour
     public bool groundthrust;
     private bool groundedLastFrame;
     public SpriteRenderer characterRender;
+    public AudioSource audSorce;
 
     void Awake()
     {
@@ -156,8 +157,9 @@ public class PlayerControl : MonoBehaviour
             //anim.SetTrigger("Jump");
 
             // Play a random jump audio clip.
-            //int i = Random.Range(0, jumpClips.Length);
-            //AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
+            float i = Random.Range(-0.8f, 0.0f);
+            audSorce.pitch = 1 + i;
+            audSorce.Play();
 
             // Add a vertical force to the player.
             rb.AddForce(new Vector2(0f, jumpForce));
