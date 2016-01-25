@@ -21,9 +21,9 @@ public class PlayerControl : MonoBehaviour
     private MainMenuController inGameMenu;  //reference to the main menu controller on canvas
     private LevelController levelController;
 
-    //private int tauntIndex;				// The index of the taunts array indicating the most recent taunt.
-    private Transform groundCheck;          // A position marking where to check if the player is grounded.
+    //private int tauntIndex;				// The index of the taunts array indicating the most recent taunt.         // A position marking where to check if the player is grounded.
     private Transform wallCheck;            // Position marking the front of the player to check for walls
+    private Transform groundCheck;
     public bool grounded = false;           // Whether or not the player is grounded.
     public bool walled = false;             // Ya know, walls and shit
     private Rigidbody2D rb;                 // Unity 5.0 Correction reference            
@@ -36,18 +36,30 @@ public class PlayerControl : MonoBehaviour
     public Image sunBar;
     public Image sunScreenTimer;
     private LayerMask shadeLayer;
+    public CircleCollider2D charBottom;
+    public CircleCollider2D groundSpace;
+    private LayerMask groundLayer;
+    private bool groundClose;
+    public bool groundthrust;
+    private bool groundedLastFrame;
+    public SpriteRenderer characterRender;
+    public AudioSource audSorce;
 
     void Awake()
     {
         inShade = false;
         sunscreen = false;
+        groundedLastFrame = false;
         shadeLayer = LayerMask.GetMask("Shade");
+        groundLayer = LayerMask.GetMask("Ground");
+        //charBottom = gameObject.GetComponent<CircleCollider2D>();
         // Setting up references.
         Canvas canvas = FindObjectOfType<Canvas>();
         inGameMenu = canvas.GetComponent<MainMenuController>();
         levelController = levelControlGO.GetComponent<LevelController>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         groundCheck = transform.Find("GroundCheck");
+        //characterRender = gameObject.GetComponent<SpriteRenderer>();
         wallCheck = wallGOCheck.transform;
         //anim = GetComponent<Animator>();
         if (levelController.sunny)
@@ -67,9 +79,13 @@ public class PlayerControl : MonoBehaviour
             else
                 inGameMenu.OnInGameMenuOpen();
         }
+        if (rb.velocity.y < -10)
+        {
+            groundthrust = false;
+        }
 
         // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        groundClose = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
         walled = Physics2D.Linecast(transform.position, wallCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
         // If the jump button is pressed and the player is grounded then the player should jump.
@@ -81,12 +97,26 @@ public class PlayerControl : MonoBehaviour
     {
         // Cache the horizontal input.
         float h = Input.GetAxis("Horizontal");
+        if (groundedLastFrame)
+        {
+            grounded = groundSpace.IsTouchingLayers(groundLayer);
+            groundedLastFrame = false;
+        } else
+        {
+            grounded = groundSpace.IsTouchingLayers(groundLayer);
+            groundedLastFrame = true;
+        }
 
         if (!walled && !grounded)
         {
             // without next switch the character cannot switch directions in midair, possibly a good thing
             if (samePositionY == gameObject.transform.position.y)
                 h = 0;
+            if (groundClose && !groundthrust)
+            {
+                rb.AddForce(new Vector2(0.0f,rb.velocity.y * -2.0f));
+                groundthrust = true;
+            }
         }
 
         if (walled && !grounded)
@@ -127,8 +157,9 @@ public class PlayerControl : MonoBehaviour
             //anim.SetTrigger("Jump");
 
             // Play a random jump audio clip.
-            //int i = Random.Range(0, jumpClips.Length);
-            //AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
+            float i = Random.Range(-0.8f, 0.0f);
+            audSorce.pitch = 1 + i;
+            audSorce.Play();
 
             // Add a vertical force to the player.
             rb.AddForce(new Vector2(0f, jumpForce));
@@ -163,6 +194,7 @@ public class PlayerControl : MonoBehaviour
         }
         sunExposure = Mathf.Clamp(sunExposure, -1, 100.0f);
         sunBar.fillAmount = sunExposure / 100.0f;
+        characterRender.material.color = Color.Lerp(Color.red, Color.white, (sunExposure / 100.0f));
     }
     void SunscreenCounter()
     {
