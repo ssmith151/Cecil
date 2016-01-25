@@ -33,8 +33,9 @@ public class PlayerControl : MonoBehaviour
     private bool inShade;
     private bool sunscreen;
     public float melatonin = 0.0f;
-    public Image sunBar;
-    public Image sunScreenTimer;
+    private Image sunBar;
+    private Image sunScreenTimer;
+    private Image healthBar;
     private LayerMask shadeLayer;
     public CircleCollider2D charBottom;
     public CircleCollider2D groundSpace;
@@ -50,10 +51,14 @@ public class PlayerControl : MonoBehaviour
         inShade = false;
         sunscreen = false;
         groundedLastFrame = false;
+        healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
+        sunBar = GameObject.Find("SunDamageBar").GetComponent<Image>();
+        sunScreenTimer = GameObject.Find("SunscreenTimer").GetComponent<Image>();
         shadeLayer = LayerMask.GetMask("Shade");
         groundLayer = LayerMask.GetMask("Ground");
         //charBottom = gameObject.GetComponent<CircleCollider2D>();
         // Setting up references.
+        Debug.Log(sunBar);
         Canvas canvas = FindObjectOfType<Canvas>();
         inGameMenu = canvas.GetComponent<MainMenuController>();
         levelController = levelControlGO.GetComponent<LevelController>();
