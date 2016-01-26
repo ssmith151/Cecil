@@ -7,6 +7,7 @@ public class LevelObjective : MonoBehaviour {
     private GameObject levelControllerGO;
     public string playerText;
     public bool stopPlayer;
+    public int timer;
 
     void Awake()
     {
@@ -20,7 +21,7 @@ public class LevelObjective : MonoBehaviour {
         {
             GameObject a = other.gameObject;
             string b = playerText;
-            levelController.Conversation(a, b, stopPlayer);
+            levelController.Conversation(a, b, stopPlayer, timer);
         }
     }
 }

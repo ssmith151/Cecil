@@ -246,17 +246,17 @@ public class PlayerControl : MonoBehaviour
         // ... and then reload the level.
         Application.LoadLevel(Application.loadedLevel);
     }
-    public void StopPlayer()
+    public void StopPlayer(int stopTime)
     {
         if (playerCanMove)
         {
-            StartCoroutine(StopPlayerCo());
+            StartCoroutine(StopPlayerCo(stopTime));
         }
     }
-    IEnumerator StopPlayerCo()
+    IEnumerator StopPlayerCo(int stopTime)
     {
         playerCanMove = false;
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(stopTime);
         playerCanMove = true;
     }
 }
