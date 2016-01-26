@@ -26,7 +26,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 496594}
   - 212: {fileID: 21289468}
-  - 122: {fileID: 12243880}
   - 123: {fileID: 12342060}
   - 114: {fileID: 11468586}
   m_Layer: 0
@@ -121,17 +120,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotation: 1
   waittime: .100000001
---- !u!122 &12243880
-Halo:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 111524}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278255601
-  m_Size: 5
 --- !u!123 &12342060
 LensFlare:
   m_ObjectHideFlags: 1
@@ -140,9 +128,9 @@ LensFlare:
   m_GameObject: {fileID: 111524}
   m_Enabled: 1
   m_Flare: {fileID: 12100000, guid: 6174f2fe01a3c418090a23ec2f36e684, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Brightness: 1
-  m_FadeSpeed: 3
+  m_FadeSpeed: 1
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 7
@@ -224,7 +212,7 @@ SpriteRenderer:
   m_SortingLayerID: 1535931219
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f2fe89f83740c471f962894f04d8b3be, type: 3}
-  m_Color: {r: 1, g: .982150078, b: .352941155, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
