@@ -61,7 +61,7 @@ public class PlayerControl : MonoBehaviour
         groundLayer = LayerMask.GetMask("Ground");
         //charBottom = gameObject.GetComponent<CircleCollider2D>();
         // Setting up references.
-        Canvas canvas = FindObjectOfType<Canvas>();
+        Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         inGameMenu = canvas.GetComponent<MainMenuController>();
         levelController = levelControlGO.GetComponent<LevelController>();
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -69,6 +69,7 @@ public class PlayerControl : MonoBehaviour
         //characterRender = gameObject.GetComponent<SpriteRenderer>();
         wallCheck = wallGOCheck.transform;
         //anim = GetComponent<Animator>();
+        Debug.Log(inGameMenu.name);
         if (levelController.sunny)
             InvokeRepeating("SunDamage", 5, 1);
     }

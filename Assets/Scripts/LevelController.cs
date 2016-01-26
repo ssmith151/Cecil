@@ -51,7 +51,7 @@ public class LevelController : MonoBehaviour {
         {
             counter += s.Length;
             //Debug.Log(s + " is " + s.Length + " and the count is " + counter);
-            if (counter > 14)
+            if (counter > 14  && s != dialogWords[dialogWords.Length - 1])
             {
                 newDialog += s + System.Environment.NewLine;
                 counter = 0;
