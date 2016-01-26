@@ -16,67 +16,162 @@ Loading C:\Users\Stephen\Documents\Documents\Unity\Cecil\Builds\V0.3.2 CecilTheC
 Platform assembly: C:\Users\Stephen\Documents\Documents\Unity\Cecil\Builds\V0.3.2 CecilTheCell_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\Stephen\Documents\Documents\Unity\Cecil\Builds\V0.3.2 CecilTheCell_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\Stephen\Documents\Documents\Unity\Cecil\Builds\V0.3.2 CecilTheCell_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.072 seconds
+- Completed reload, in  0.132 seconds
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
 Platform assembly: C:\Users\Stephen\Documents\Documents\Unity\Cecil\Builds\V0.3.2 CecilTheCell_Data\Managed\System.dll (this message is harmless)
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 13cc -> priority: 1 
-The referenced script on this Behaviour is missing!
+  Thread -> id: 36fc -> priority: 1 
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 9.218937 ms
+
+Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1939.
+Total: 0.918600 ms (FindLiveObjects: 0.119743 ms CreateObjectMapping: 0.039344 ms MarkObjects: 0.745400 ms  DeleteObjects: 0.013684 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.877256 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1939.
+Total: 2.249459 ms (FindLiveObjects: 0.488380 ms CreateObjectMapping: 0.170633 ms MarkObjects: 1.568207 ms  DeleteObjects: 0.020099 ms)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.SpriteRenderer:INTERNAL_get_color (UnityEngine.Color&)
+  at UnityEngine.SpriteRenderer.get_color () [0x00000] in <filename unknown>:0 
+  at LevelController+<Fader>c__Iterator3.MoveNext () [0x00000] in <filename unknown>:0 
+UnityEngine.MonoBehaviour:StartCoroutine_Auto(IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
+<EndBubble>c__Iterator1:MoveNext()
  
-(Filename:  Line: 1649)
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LevelController+<EndBubble>c__Iterator1.MoveNext () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.736985 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1939.
+Total: 2.263572 ms (FindLiveObjects: 0.268566 ms CreateObjectMapping: 0.082109 ms MarkObjects: 1.885526 ms  DeleteObjects: 0.024376 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 5.107043 ms
-SunDamageBar (UnityEngine.UI.Image)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+UnloadTime: 3.442614 ms
 
+Unloading 59 unused Assets to reduce memory usage. Loaded Objects now: 244.
+Total: 1.519882 ms (FindLiveObjects: 0.055595 ms CreateObjectMapping: 0.053884 ms MarkObjects: 1.293225 ms  DeleteObjects: 0.115894 ms)
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 1362.
-Total: 0.688095 ms (FindLiveObjects: 0.091090 ms CreateObjectMapping: 0.037205 ms MarkObjects: 0.544403 ms  DeleteObjects: 0.014112 ms)
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.090090 ms
 
-The referenced script on this Behaviour is missing!
- 
-(Filename:  Line: 1649)
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 244.
+Total: 1.372769 ms (FindLiveObjects: 0.041054 ms CreateObjectMapping: 0.034212 ms MarkObjects: 1.283817 ms  DeleteObjects: 0.011974 ms)
 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.442759 ms
-SunDamageBar (UnityEngine.UI.Image)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+UnloadTime: 0.598287 ms
 
-
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1362.
-Total: 1.585313 ms (FindLiveObjects: 0.179187 ms CreateObjectMapping: 0.083820 ms MarkObjects: 1.303917 ms  DeleteObjects: 0.017106 ms)
-
-The referenced script on this Behaviour is missing!
- 
-(Filename:  Line: 1649)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 397.
+Total: 0.898073 ms (FindLiveObjects: 0.037205 ms CreateObjectMapping: 0.023948 ms MarkObjects: 0.821095 ms  DeleteObjects: 0.015395 ms)
 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.399994 ms
-SunDamageBar (UnityEngine.UI.Image)
+UnloadTime: 0.794153 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 1939.
+Total: 1.294080 ms (FindLiveObjects: 0.133428 ms CreateObjectMapping: 0.038061 ms MarkObjects: 1.107623 ms  DeleteObjects: 0.013684 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerControl.Update () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+(Filename:  Line: -1)
 
-
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1362.
-Total: 1.806410 ms (FindLiveObjects: 0.177048 ms CreateObjectMapping: 0.084247 ms MarkObjects: 1.525869 ms  DeleteObjects: 0.017961 ms)
-
-The referenced script on this Behaviour is missing!
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerControl.Update () [0x00000] in <filename unknown>:0 
  
-(Filename:  Line: 1649)
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.257730 ms
-SunDamageBar (UnityEngine.UI.Image)
+UnloadTime: 2.781889 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1939.
+Total: 2.853307 ms (FindLiveObjects: 0.259585 ms CreateObjectMapping: 0.088524 ms MarkObjects: 2.482531 ms  DeleteObjects: 0.020527 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.275829 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1939.
+Total: 3.047889 ms (FindLiveObjects: 0.255309 ms CreateObjectMapping: 0.087669 ms MarkObjects: 2.679252 ms  DeleteObjects: 0.023093 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.582457 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1939.
+Total: 3.225366 ms (FindLiveObjects: 0.255309 ms CreateObjectMapping: 0.083820 ms MarkObjects: 2.863998 ms  DeleteObjects: 0.020955 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.005979 ms
+
+Unloading 59 unused Assets to reduce memory usage. Loaded Objects now: 244.
+Total: 2.574049 ms (FindLiveObjects: 0.061154 ms CreateObjectMapping: 0.054312 ms MarkObjects: 2.332852 ms  DeleteObjects: 0.121026 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.884388 ms
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 397.
+Total: 1.881249 ms (FindLiveObjects: 0.106913 ms CreateObjectMapping: 0.050463 ms MarkObjects: 1.706767 ms  DeleteObjects: 0.015823 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.014822 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 1939.
+Total: 1.790159 ms (FindLiveObjects: 0.135138 ms CreateObjectMapping: 0.036778 ms MarkObjects: 1.603702 ms  DeleteObjects: 0.013684 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.798567 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1939.
+Total: 4.057581 ms (FindLiveObjects: 0.237347 ms CreateObjectMapping: 0.090662 ms MarkObjects: 3.686805 ms  DeleteObjects: 0.041482 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.810114 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1939.
+Total: 4.116169 ms (FindLiveObjects: 0.262151 ms CreateObjectMapping: 0.085958 ms MarkObjects: 3.744538 ms  DeleteObjects: 0.021382 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerControl.Update () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+(Filename:  Line: -1)
 
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1362.
-Total: 0.942977 ms (FindLiveObjects: 0.083820 ms CreateObjectMapping: 0.036778 ms MarkObjects: 0.813397 ms  DeleteObjects: 0.008553 ms)
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 
