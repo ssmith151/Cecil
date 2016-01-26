@@ -23,7 +23,7 @@ public class LevelController : MonoBehaviour {
         dialogGO.SetActive(false);
     }
 
-    public void Conversation(GameObject talker, string dialog, bool makeStop)
+    public void Conversation(GameObject talker, string dialog, bool makeStop, int stopTime)
     {
         if (dialogGO.activeSelf)
         {
@@ -31,7 +31,7 @@ public class LevelController : MonoBehaviour {
         }
         if (makeStop)
         {
-            CC.StopPlayer();
+            CC.StopPlayer(stopTime);
         }
         if (dialog.Length > 16)
             dialog = DialogChop(dialog);
