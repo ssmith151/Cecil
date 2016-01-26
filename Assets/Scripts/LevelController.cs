@@ -18,31 +18,57 @@ public class LevelController : MonoBehaviour {
 
     void Awake ()
     {
-        dialogGO = dialogBubble.transform.parent.gameObject;
+        dialogGO = GameObject.Find("Dialog");
         CC = character.GetComponent<PlayerControl>();
+        dialogGO.SetActive(false);
     }
 
-    public void Conversation(GameObject talker, string dialog)
+    public void Conversation(GameObject talker, string dialog, bool makeStop)
     {
         if (dialogGO.activeSelf)
         {
             return;
         }
+        if (makeStop)
+        {
+            CC.StopPlayer();
+        }
+        if (dialog.Length > 16)
+            dialog = DialogChop(dialog);
         dialogGO.SetActive(true);
-        StartCoroutine( Fader());
+        StartCoroutine( Fader(true));
         dialogGO.transform.position = new Vector3(talker.transform.position.x, talker.transform.position.y + 1.0f, talker.transform.position.z);
         dialogGO.transform.SetParent(talker.transform);
     //    StartCoroutine(FlipChecker());
         StartCoroutine(AnimateText(dialog));
-        StartCoroutine(EndBubble());
     }
-    //bool CharacterFlipped()
-    //{
-    //    if (CC.facingRight)
-    //        return true;
-    //    else
-    //        return false;
-    //}
+    string DialogChop(string dialog)
+    {
+        string newDialog = "";
+        string[] dialogWords = dialog.Split(' ');
+        int counter = 0;
+        foreach (string s in dialogWords)
+        {
+            counter += s.Length;
+            //Debug.Log(s + " is " + s.Length + " and the count is " + counter);
+            if (counter > 14)
+            {
+                newDialog += s + System.Environment.NewLine;
+                counter = 0;
+            } else
+            {
+                newDialog += s + " ";
+            }
+        }
+        return newDialog;
+    }
+    bool CharacterFlipped()
+    {
+        if (CC.facingRight)
+            return false;
+        else
+            return true;
+    }
     //IEnumerator FlipChecker()
     //{
     //    if (CharacterFlipped()) { 
@@ -54,6 +80,7 @@ public class LevelController : MonoBehaviour {
     IEnumerator EndBubble()
     {
         yield return new WaitForSeconds(dialogWait);
+        yield return StartCoroutine(Fader(false));
         dialogBubble.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         dialogGO.gameObject.SetActive(false);
     }
@@ -61,26 +88,64 @@ public class LevelController : MonoBehaviour {
     {
         string dialogPart = "";
         float dialogBubbleWidth = 1.0f;
+        float dialogBubbleHeight = 1.0f;
         for (int i = 0; i < dialogComplete.Length; i++)
         {
             dialogPart += dialogComplete[i];
             dialogText.text = dialogPart;
-            if (i > 16) {
-                dialogBubbleWidth = dialogPart.Length / 12.0f;
-                Mathf.Clamp(dialogBubbleWidth, 1.0f, 2.5f);
-                dialogBubble.transform.localScale = new Vector3(dialogBubbleWidth, 1.0f, 1.0f);
+            if (i > 12) {
+                dialogBubbleWidth = dialogPart.Length / 8.0f;
+                dialogBubbleWidth = Mathf.Clamp(dialogBubbleWidth, 1.0f, 2.5f);
             }
+            if (i > 46)
+            {
+                if (dialogPart.EndsWith(System.Environment.NewLine))
+                    dialogBubbleHeight += 0.333f;
+            }
+            TextFixer();
+            dialogBubble.transform.localScale = new Vector3(dialogBubbleWidth, dialogBubbleHeight, 1.0f);
             yield return new WaitForSeconds(0.1f * dialogScrollTime);
         }
+        StartCoroutine(EndBubble());
     }
-    IEnumerator Fader()
+    void TextFixer()
     {
-        Color fadeColor = dialogBubble.color;
-        for (float i = 0; i < 10; i++)
+        if (CharacterFlipped())
         {
-            fadeColor = new Color(fadeColor.r, fadeColor.g, fadeColor.b, i*0.1F);
-            dialogBubble.color = fadeColor;
-            yield return new WaitForSeconds(0.05f);
+            dialogText.rectTransform.localScale = new Vector3(-dialogText.rectTransform.localScale.x *
+                Mathf.Sign(dialogText.rectTransform.localScale.x),
+                dialogText.rectTransform.localScale.y, dialogText.rectTransform.localScale.z);
+        } else
+        {
+            dialogText.rectTransform.localScale = new Vector3(dialogText.rectTransform.localScale.x *
+                Mathf.Sign(dialogText.rectTransform.localScale.x),
+                dialogText.rectTransform.localScale.y, dialogText.rectTransform.localScale.z);
+        }
+    }
+    IEnumerator Fader(bool incoming)
+    {
+        Color fadeColorBubble = dialogBubble.color;
+        Color fadeColorText = dialogText.color;
+        if (incoming)
+        {
+            for (float i = 0; i <= 10; i++)
+            {
+                fadeColorBubble = new Color(fadeColorBubble.r, fadeColorBubble.g, fadeColorBubble.b, i * 0.1F);
+                fadeColorText = new Color(fadeColorText.r, fadeColorText.g, fadeColorText.b, i * 0.1F);
+                dialogText.color = fadeColorText;
+                dialogBubble.color = fadeColorBubble;
+                yield return new WaitForSeconds(0.02f);
+            }
+        } else
+        {
+            for (float i = 10; i >= 0; i--)
+            {
+                fadeColorBubble = new Color(fadeColorBubble.r, fadeColorBubble.g, fadeColorBubble.b, i * 0.1F);
+                fadeColorText = new Color(fadeColorText.r, fadeColorText.g, fadeColorText.b, i * 0.1F);
+                dialogText.color = fadeColorText;
+                dialogBubble.color = fadeColorBubble;
+                yield return new WaitForSeconds(0.02f);
+            }
         }
     }
 }

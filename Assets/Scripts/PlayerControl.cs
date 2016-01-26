@@ -30,6 +30,7 @@ public class PlayerControl : MonoBehaviour
     private float samePositionY;            // sets a float every fixed update to keep character falling on a wall
     //private Animator anim;				// Reference to the player's animator component.
     private float sunExposure = 100f;
+    private float health = 100f;
     private bool inShade;
     private bool sunscreen;
     public float melatonin = 0.0f;
@@ -45,9 +46,11 @@ public class PlayerControl : MonoBehaviour
     private bool groundedLastFrame;
     public SpriteRenderer characterRender;
     public AudioSource audSorce;
+    public bool playerCanMove;
 
     void Awake()
     {
+        playerCanMove = true;
         inShade = false;
         sunscreen = false;
         groundedLastFrame = false;
@@ -58,7 +61,6 @@ public class PlayerControl : MonoBehaviour
         groundLayer = LayerMask.GetMask("Ground");
         //charBottom = gameObject.GetComponent<CircleCollider2D>();
         // Setting up references.
-        Debug.Log(sunBar);
         Canvas canvas = FindObjectOfType<Canvas>();
         inGameMenu = canvas.GetComponent<MainMenuController>();
         levelController = levelControlGO.GetComponent<LevelController>();
@@ -123,7 +125,10 @@ public class PlayerControl : MonoBehaviour
                 groundthrust = true;
             }
         }
-
+        if (!playerCanMove)
+        {
+            h = 0;
+        }
         if (walled && !grounded)
         {
             if (h != 0)
@@ -155,8 +160,8 @@ public class PlayerControl : MonoBehaviour
             // ... flip the player.
             Flip();
 
-        // If the player should jump...
-        if (jump)
+        // If the player should jump and isn't stuck/Immovable
+        if (jump && playerCanMove)
         {
             // Set the Jump animator trigger parameter.
             //anim.SetTrigger("Jump");
@@ -198,6 +203,8 @@ public class PlayerControl : MonoBehaviour
             sunExposure += 12;
         }
         sunExposure = Mathf.Clamp(sunExposure, -1, 100.0f);
+        if (sunExposure <= 0)
+            TakeDamage(10.0f);
         sunBar.fillAmount = sunExposure / 100.0f;
         characterRender.material.color = Color.Lerp(Color.red, Color.white, (sunExposure / 100.0f));
     }
@@ -205,7 +212,7 @@ public class PlayerControl : MonoBehaviour
     {
         melatonin -= 1;
         sunScreenTimer.fillAmount = melatonin / 100.0f;
-        Mathf.Clamp(melatonin, 0, 100);
+        melatonin = Mathf.Clamp(melatonin, 0, 100);
         if (melatonin == 0)
         {
             CancelInvoke("SunscreenCounter");
@@ -220,6 +227,37 @@ public class PlayerControl : MonoBehaviour
             InvokeRepeating("SunscreenCounter", 0.0f, 0.2f);
             sunscreen = true;
         }
+    }
+    public void TakeDamage(float damageIn)
+    {
+        health -= damageIn;
+        healthBar.fillAmount = health / 100.0f;
+        Mathf.Clamp(health, 0, 100);
+        // play an audioclip
+        if (health <= 0)
+        {
+            StartCoroutine(ReloadGame());
+        }
+    }
+    IEnumerator ReloadGame()
+    {
+        // ... pause briefly
+        yield return new WaitForSeconds(2);
+        // ... and then reload the level.
+        Application.LoadLevel(Application.loadedLevel);
+    }
+    public void StopPlayer()
+    {
+        if (playerCanMove)
+        {
+            StartCoroutine(StopPlayerCo());
+        }
+    }
+    IEnumerator StopPlayerCo()
+    {
+        playerCanMove = false;
+        yield return new WaitForSeconds(2.0f);
+        playerCanMove = true;
     }
 }
 //	public IEnumerator Taunt()

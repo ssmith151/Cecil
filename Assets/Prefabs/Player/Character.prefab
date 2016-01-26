@@ -272,9 +272,9 @@ MonoBehaviour:
   facingRight: 1
   jump: 0
   wallGOCheck: {fileID: 107648}
-  levelControlGO: {fileID: 109434, guid: 6a423345f9f8ab8499bed0995aa5cb73, type: 2}
+  levelControlGO: {fileID: 119432, guid: 6a423345f9f8ab8499bed0995aa5cb73, type: 2}
   triggerCollider: {fileID: 6159358}
-  moveForce: 500
+  moveForce: 400
   maxSpeed: 4
   jumpForce: 500
   grounded: 0
@@ -347,7 +347,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: levelControlGO
       value: 
-      objectReference: {fileID: 109434, guid: 6a423345f9f8ab8499bed0995aa5cb73, type: 2}
+      objectReference: {fileID: 119432, guid: 6a423345f9f8ab8499bed0995aa5cb73, type: 2}
+    - target: {fileID: 0}
+      propertyPath: moveForce
+      value: 400
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 101658}

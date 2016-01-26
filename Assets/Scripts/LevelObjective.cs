@@ -3,13 +3,24 @@ using System.Collections;
 
 public class LevelObjective : MonoBehaviour {
 
-    public LevelController levelController;
-    public GameObject levelControllerGO;
+    private LevelController levelController;
+    private GameObject levelControllerGO;
+    public string playerText;
+    public bool stopPlayer;
+
+    void Awake()
+    {
+        levelControllerGO = gameObject.transform.root.gameObject;
+        levelController = levelControllerGO.GetComponent<LevelController>();
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        GameObject a = other.gameObject;
-        string b = "It is dark\nand cool here!";
-        levelController.Conversation(a, b);
+        if (other.CompareTag("Player"))
+        {
+            GameObject a = other.gameObject;
+            string b = playerText;
+            levelController.Conversation(a, b, stopPlayer);
+        }
     }
 }
