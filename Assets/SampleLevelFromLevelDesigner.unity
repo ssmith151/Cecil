@@ -5727,6 +5727,7 @@ MonoBehaviour:
   - {fileID: 2048351989}
   - {fileID: 952113139}
   - {fileID: 923972597}
+  - {fileID: 912493053}
   parallaxScale: 10
   parallaxReductionFactor: -.200000003
   smoothing: 1
@@ -16142,6 +16143,14 @@ Prefab:
     - target: {fileID: 21233626, guid: dbc7300c066b35c4b9c4a362e12718da, type: 2}
       propertyPath: m_SortingLayerID
       value: 1024582385
+      objectReference: {fileID: 0}
+    - target: {fileID: 416206, guid: dbc7300c066b35c4b9c4a362e12718da, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 416206, guid: dbc7300c066b35c4b9c4a362e12718da, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbc7300c066b35c4b9c4a362e12718da, type: 2}
