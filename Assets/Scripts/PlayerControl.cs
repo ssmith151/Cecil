@@ -11,10 +11,10 @@ public class PlayerControl : MonoBehaviour
     public GameObject wallGOCheck;          // GameObject to collect the reference to get transform, for walls ya know
     public GameObject levelControlGO;
     public Collider2D triggerCollider;
-    public float moveForce = 365f;          // Amount of force added to move the player left and right.
-    public float maxSpeed = 5f;             // The fastest the player can travel in the x axis.
+    public float moveForce;          // Amount of force added to move the player left and right.
+    public float maxSpeed;             // The fastest the player can travel in the x axis.
                                             //public AudioClip[] jumpClips;			// Array of clips for when the player jumps.
-    public float jumpForce = 1000f;         // Amount of force added when the player jumps.
+    public float jumpForce;         // Amount of force added when the player jumps.
                                             //public AudioClip[] taunts;				// Array of clips for when the player taunts.
                                             //public float tauntProbability = 50f;	// Chance of a taunt happening.
                                             //public float tauntDelay = 1f;			// Delay for when the taunt should happen.
@@ -34,7 +34,7 @@ public class PlayerControl : MonoBehaviour
     private bool inShade;
     private bool sunscreen;
     public float melatonin = 0.0f;
-    private Image sunBar;
+    private Text scoreText;
     private Image sunScreenTimer;
     private Image healthBar;
     private LayerMask shadeLayer;
@@ -47,6 +47,7 @@ public class PlayerControl : MonoBehaviour
     public SpriteRenderer characterRender;
     public AudioSource audSorce;
     public bool playerCanMove;
+    private int score;
 
     void Awake()
     {
@@ -55,7 +56,7 @@ public class PlayerControl : MonoBehaviour
         sunscreen = false;
         groundedLastFrame = false;
         healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
-        sunBar = GameObject.Find("SunDamageBar").GetComponent<Image>();
+        scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
         sunScreenTimer = GameObject.Find("SunscreenTimer").GetComponent<Image>();
         shadeLayer = LayerMask.GetMask("Shade");
         groundLayer = LayerMask.GetMask("Ground");
@@ -69,7 +70,6 @@ public class PlayerControl : MonoBehaviour
         //characterRender = gameObject.GetComponent<SpriteRenderer>();
         wallCheck = wallGOCheck.transform;
         //anim = GetComponent<Animator>();
-        Debug.Log(inGameMenu.name);
         if (levelController.sunny)
             InvokeRepeating("SunDamage", 5, 1);
     }
@@ -206,7 +206,7 @@ public class PlayerControl : MonoBehaviour
         sunExposure = Mathf.Clamp(sunExposure, -1, 100.0f);
         if (sunExposure <= 0)
             TakeDamage(10.0f);
-        sunBar.fillAmount = sunExposure / 100.0f;
+        //sunBar.fillAmount = sunExposure / 100.0f;
         characterRender.material.color = Color.Lerp(Color.red, Color.white, (sunExposure / 100.0f));
     }
     void SunscreenCounter()
@@ -239,6 +239,18 @@ public class PlayerControl : MonoBehaviour
         {
             StartCoroutine(ReloadGame());
         }
+    }
+    public void AddHealth(float healthIn)
+    {
+        health += healthIn;
+        healthBar.fillAmount = health / 100.0f;
+        Mathf.Clamp(health, 0, 100);
+        // play an audioclip
+    }
+    public void AddPoints(int pointsIn)
+    {
+        score += pointsIn;
+        scoreText.text = "Score : " + score;
     }
     IEnumerator ReloadGame()
     {

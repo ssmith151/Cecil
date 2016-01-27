@@ -89,7 +89,7 @@ Transform:
   m_GameObject: {fileID: 101658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.57000005, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 446010}
   - {fileID: 406376}
@@ -146,9 +146,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -.200000003}
+  m_Offset: {x: .0299999993, y: -.180000007}
   serializedVersion: 2
-  m_Radius: .170000002
+  m_Radius: .215000004
 --- !u!58 &5816850
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -159,9 +159,9 @@ CircleCollider2D:
   m_Material: {fileID: 6200000, guid: 24ac79603fb61400588e37d9f6fe952a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -.129999995}
+  m_Offset: {x: .0299999993, y: -.109999999}
   serializedVersion: 2
-  m_Radius: .180000007
+  m_Radius: .215000004
 --- !u!61 &6118742
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -185,9 +185,9 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: 24ac79603fb61400588e37d9f6fe952a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0700000003}
+  m_Offset: {x: .0299999993, y: .119999997}
   serializedVersion: 2
-  m_Size: {x: .375, y: .462286353}
+  m_Size: {x: .430000007, y: .449999988}
 --- !u!82 &8249066
 AudioSource:
   m_ObjectHideFlags: 1
@@ -274,8 +274,8 @@ MonoBehaviour:
   wallGOCheck: {fileID: 107648}
   levelControlGO: {fileID: 119432, guid: 6a423345f9f8ab8499bed0995aa5cb73, type: 2}
   triggerCollider: {fileID: 6159358}
-  moveForce: 400
-  maxSpeed: 4
+  moveForce: 100
+  maxSpeed: 5
   jumpForce: 500
   grounded: 0
   walled: 0
@@ -285,6 +285,7 @@ MonoBehaviour:
   groundthrust: 0
   characterRender: {fileID: 21233626}
   audSorce: {fileID: 8249066}
+  playerCanMove: 0
 --- !u!212 &21233626
 SpriteRenderer:
   m_ObjectHideFlags: 1
