@@ -48,6 +48,7 @@ public class PlayerControl : MonoBehaviour
     public AudioSource audSorce;
     public bool playerCanMove;
     private int score;
+    private bool invulnerable;
 
     void Awake()
     {
@@ -231,13 +232,44 @@ public class PlayerControl : MonoBehaviour
     }
     public void TakeDamage(float damageIn)
     {
+        if (invulnerable)
+            return;
         health -= damageIn;
         healthBar.fillAmount = health / 100.0f;
         Mathf.Clamp(health, 0, 100);
         // play an audioclip
+        StartCoroutine(DamageShield(0.2f));
         if (health <= 0)
         {
+            PlayerDeath();
             StartCoroutine(ReloadGame());
+            StopPlayer(2);
+        }
+    }
+    IEnumerator DamageShield(float waitUntil)
+    {
+        if (health <= 0)
+            yield return null;
+        Color preDamageColor = characterRender.material.color;
+        characterRender.material.color = Color.red;
+        invulnerable = true;
+        yield return new WaitForSeconds(waitUntil);
+        invulnerable = false;
+        characterRender.material.color = preDamageColor;
+    }
+    void PlayerDeath()
+    {
+        // play death noise
+        //play death animation
+        Collider2D[] playerColls = GetComponents<Collider2D>();
+        foreach (Collider2D col in playerColls)
+        {
+            col.isTrigger = true;
+        }
+        SpriteRenderer[] playerSprites = GetComponents<SpriteRenderer>();
+        foreach (SpriteRenderer spr in playerSprites)
+        {
+            spr.sortingLayerName = "UI";
         }
     }
     public void AddHealth(float healthIn)
