@@ -44,14 +44,17 @@ public class PlayerControl : MonoBehaviour
     private bool groundClose;
     public bool groundthrust;
     private bool groundedLastFrame;
-    public SpriteRenderer characterRender;
+    private SpriteRenderer characterRender;
     public AudioSource audSorce;
     public bool playerCanMove;
     private int score;
     private bool invulnerable;
+    private bool alive;
 
     void Awake()
     {
+        alive = true;
+        characterRender = GameObject.Find("PlayerBody").GetComponent<SpriteRenderer>();
         playerCanMove = true;
         inShade = false;
         sunscreen = false;
@@ -169,11 +172,12 @@ public class PlayerControl : MonoBehaviour
             //anim.SetTrigger("Jump");
 
             // Play a random jump audio clip.
-            float i = Random.Range(-0.8f, 0.0f);
+            float i = Random.Range(-0.4f, -0.2f);
             audSorce.pitch = 1 + i;
             audSorce.Play();
 
             // Add a vertical force to the player.
+            // if (rb.velocity.y <= jumpForce)    Does not fix super jump
             rb.AddForce(new Vector2(0f, jumpForce));
 
             // Make sure the player can't jump again until the jump conditions from Update are satisfied.
@@ -239,9 +243,25 @@ public class PlayerControl : MonoBehaviour
         Mathf.Clamp(health, 0, 100);
         // play an audioclip
         StartCoroutine(DamageShield(0.2f));
-        if (health <= 0)
+        if (health <= 0 && alive)
         {
+            alive = false;
             PlayerDeath();
+            StartCoroutine(ReloadGame());
+            StopPlayer(2);
+        }
+    }
+    public void DrownDamage()
+    {
+        health -= 2;
+        healthBar.fillAmount = health / 100.0f;
+        Mathf.Clamp(health, 0, 100);
+        // play an audioclip
+        StartCoroutine(DamageShield(0.2f));
+        if (health <= 0 && alive)
+        {
+            alive = false;
+            PlayerDrown();
             StartCoroutine(ReloadGame());
             StopPlayer(2);
         }
@@ -270,6 +290,37 @@ public class PlayerControl : MonoBehaviour
         foreach (SpriteRenderer spr in playerSprites)
         {
             spr.sortingLayerName = "UI";
+        }
+        Camera.main.GetComponent<CameraFollow>().enabled = false;
+    }
+    void PlayerDrown()
+    {
+        // play drown noise
+        //play drown animation
+        Collider2D[] playerColls = GetComponents<Collider2D>();
+        foreach (Collider2D col in playerColls)
+        {
+            col.isTrigger = true;
+        }
+        rb.velocity = new Vector2(0.0f, 0.0f);
+        SpriteRenderer[] playerSprites = GetComponents<SpriteRenderer>();
+        foreach (SpriteRenderer spr in playerSprites)
+        {
+            spr.sortingLayerName = "UI";
+        }
+        Camera.main.GetComponent<CameraFollow>().enabled = false;
+        StartCoroutine(DrownMove());
+    }
+    IEnumerator DrownMove()
+    {
+        rb.gravityScale = 0.00f;
+        float startY = transform.position.y;
+        while (true)
+        {
+            transform.position = Vector3.MoveTowards(transform.position,
+                new Vector3(transform.position.x,  startY + Mathf.Sin(Time.time),
+                transform.position.z), 0.01f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
     public void AddHealth(float healthIn)

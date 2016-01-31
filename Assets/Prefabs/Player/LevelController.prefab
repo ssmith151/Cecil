@@ -30,7 +30,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &172172
 GameObject:
   m_ObjectHideFlags: 1
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sunny: 1
   water: 0
-  character: {fileID: 101658, guid: dbc7300c066b35c4b9c4a362e12718da, type: 2}
+  character: {fileID: 0}
   dialogBubble: {fileID: 21228698}
   offSetPosition: {x: 0, y: 0}
   fadeDelay: 0

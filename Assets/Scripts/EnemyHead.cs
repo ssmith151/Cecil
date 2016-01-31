@@ -15,6 +15,7 @@ public class EnemyHead : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            other.SendMessage("AddPoints", 5.0f);
             bouncyEnemy.Death();
             Invoke("DeathSoon", 0.05f);
         }
