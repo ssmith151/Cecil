@@ -85,60 +85,6 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &21580675
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 21580676}
-  - 212: {fileID: 21580677}
-  m_Layer: 0
-  m_Name: BacteriaGraphic
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &21580676
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 21580675}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .400000006, y: .400000006, z: 1}
-  m_Children: []
-  m_Father: {fileID: 560178811}
-  m_RootOrder: 0
---- !u!212 &21580677
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 21580675}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 0
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1024582385
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c393a86c43d74e44babf606ba548d02d, type: 3}
-  m_Color: {r: .678296208, g: .551470578, b: 1, a: 1}
 --- !u!1 &55056143
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,100 +163,6 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 429648, guid: 900151c8be32ec5489b28a545ec1cad1, type: 2}
   m_PrefabInternal: {fileID: 1327990247}
---- !u!1 &65057682
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 65057683}
-  - 50: {fileID: 65057687}
-  - 61: {fileID: 65057686}
-  - 114: {fileID: 65057685}
-  - 58: {fileID: 65057684}
-  m_Layer: 0
-  m_Name: Bacteria (2)
-  m_TagString: Enemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &65057683
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 65057682}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.9680004, y: .5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 893890378}
-  - {fileID: 162240625}
-  m_Father: {fileID: 429183095}
-  m_RootOrder: 2
---- !u!58 &65057684
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 65057682}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 5
---- !u!114 &65057685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 65057682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc3c94f01ef545a4a8f76cc24a0c2d90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpHeight: 700
-  playerRadius: 10
-  bounceWait: 2
-  paceArchWait: 0
-  paceArchForce: 100
-  chaseDelay: 0
-  chaseWait: 2
-  chaseArchWait: .200000003
---- !u!61 &65057686
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 65057682}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 24ac79603fb61400588e37d9f6fe952a, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: -0, y: -.140000001}
-  serializedVersion: 2
-  m_Size: {x: .699999988, y: .5}
---- !u!50 &65057687
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 65057682}
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: .0500000007
-  m_GravityScale: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!1001 &96144351
 Prefab:
   m_ObjectHideFlags: 0
@@ -320,7 +172,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 416206, guid: dbc7300c066b35c4b9c4a362e12718da, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 8.56999969
+      value: 10.1599998
       objectReference: {fileID: 0}
     - target: {fileID: 416206, guid: dbc7300c066b35c4b9c4a362e12718da, type: 2}
       propertyPath: m_LocalPosition.y
@@ -403,144 +255,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 485552, guid: 520d26a4e1e33aa44b5a6a16aeac2028, type: 2}
   m_PrefabInternal: {fileID: 556344062}
---- !u!1 &162240624
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 162240625}
-  - 58: {fileID: 162240628}
-  - 114: {fileID: 162240627}
-  - 58: {fileID: 162240626}
-  m_Layer: 0
-  m_Name: BacteriaHead
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &162240625
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 162240624}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 65057683}
-  m_RootOrder: 1
---- !u!58 &162240626
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 162240624}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 8f0fca7fbdec8f24ebadee58c0a80e28, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .150000006}
-  serializedVersion: 2
-  m_Radius: .25
---- !u!114 &162240627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 162240624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c68965f00e374048a89dea7301d9550, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!58 &162240628
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 162240624}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 24ac79603fb61400588e37d9f6fe952a, type: 2}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .150000006}
-  serializedVersion: 2
-  m_Radius: .25
---- !u!1 &234768846
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 234768847}
-  - 58: {fileID: 234768850}
-  - 114: {fileID: 234768849}
-  - 58: {fileID: 234768848}
-  m_Layer: 0
-  m_Name: BacteriaHead
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &234768847
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 234768846}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 560178811}
-  m_RootOrder: 1
---- !u!58 &234768848
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 234768846}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 8f0fca7fbdec8f24ebadee58c0a80e28, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .150000006}
-  serializedVersion: 2
-  m_Radius: .25
---- !u!114 &234768849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 234768846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c68965f00e374048a89dea7301d9550, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!58 &234768850
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 234768846}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 24ac79603fb61400588e37d9f6fe952a, type: 2}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .150000006}
-  serializedVersion: 2
-  m_Radius: .25
---- !u!4 &242734712 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 462728, guid: 57caaa283e38a504bbac5e9fdb829fc2, type: 2}
-  m_PrefabInternal: {fileID: 267997714}
 --- !u!1001 &258129643
 Prefab:
   m_ObjectHideFlags: 0
@@ -582,48 +296,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0699530a970127c46888da11d1f31b73, type: 2}
-  m_IsPrefabParent: 0
---- !u!1001 &267997714
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 429183095}
-    m_Modifications:
-    - target: {fileID: 462728, guid: 57caaa283e38a504bbac5e9fdb829fc2, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 462728, guid: 57caaa283e38a504bbac5e9fdb829fc2, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: .5
-      objectReference: {fileID: 0}
-    - target: {fileID: 462728, guid: 57caaa283e38a504bbac5e9fdb829fc2, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 462728, guid: 57caaa283e38a504bbac5e9fdb829fc2, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 462728, guid: 57caaa283e38a504bbac5e9fdb829fc2, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 462728, guid: 57caaa283e38a504bbac5e9fdb829fc2, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 462728, guid: 57caaa283e38a504bbac5e9fdb829fc2, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 462728, guid: 57caaa283e38a504bbac5e9fdb829fc2, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 57caaa283e38a504bbac5e9fdb829fc2, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &314996421
 Prefab:
@@ -761,11 +433,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 242734712}
-  - {fileID: 560178811}
-  - {fileID: 65057683}
-  - {fileID: 609761847}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
 --- !u!1 &484299715
@@ -836,6 +504,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1718752995}
   m_RootOrder: 10
+--- !u!4 &527335146 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 429436, guid: c12ba07f9b8fbc34da211680125e6ebd, type: 2}
+  m_PrefabInternal: {fileID: 1000181965}
 --- !u!1001 &556344062
 Prefab:
   m_ObjectHideFlags: 0
@@ -883,194 +555,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 520d26a4e1e33aa44b5a6a16aeac2028, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &560178810
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 560178811}
-  - 50: {fileID: 560178815}
-  - 61: {fileID: 560178814}
-  - 114: {fileID: 560178813}
-  - 58: {fileID: 560178812}
-  m_Layer: 0
-  m_Name: Bacteria (1)
-  m_TagString: Enemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &560178811
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 560178810}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.8950005, y: .5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 21580676}
-  - {fileID: 234768847}
-  m_Father: {fileID: 429183095}
-  m_RootOrder: 1
---- !u!58 &560178812
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 560178810}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 5
---- !u!114 &560178813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 560178810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc3c94f01ef545a4a8f76cc24a0c2d90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpHeight: 700
-  playerRadius: 10
-  bounceWait: 2
-  paceArchWait: 0
-  paceArchForce: 100
-  chaseDelay: 0
-  chaseWait: 2
-  chaseArchWait: .200000003
---- !u!61 &560178814
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 560178810}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 24ac79603fb61400588e37d9f6fe952a, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: -0, y: -.140000001}
-  serializedVersion: 2
-  m_Size: {x: .699999988, y: .5}
---- !u!50 &560178815
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 560178810}
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: .0500000007
-  m_GravityScale: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!1 &609761842
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 609761847}
-  - 50: {fileID: 609761846}
-  - 61: {fileID: 609761845}
-  - 114: {fileID: 609761844}
-  - 58: {fileID: 609761843}
-  m_Layer: 0
-  m_Name: Bacteria (3)
-  m_TagString: Enemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!58 &609761843
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 609761842}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 5
---- !u!114 &609761844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 609761842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc3c94f01ef545a4a8f76cc24a0c2d90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpHeight: 700
-  playerRadius: 10
-  bounceWait: 2
-  paceArchWait: 0
-  paceArchForce: 100
-  chaseDelay: 0
-  chaseWait: 2
-  chaseArchWait: .200000003
---- !u!61 &609761845
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 609761842}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 24ac79603fb61400588e37d9f6fe952a, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: -0, y: -.140000001}
-  serializedVersion: 2
-  m_Size: {x: .699999988, y: .5}
---- !u!50 &609761846
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 609761842}
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: .0500000007
-  m_GravityScale: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!4 &609761847
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 609761842}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.0380001, y: .5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1150259663}
-  - {fileID: 1115018991}
-  m_Father: {fileID: 429183095}
-  m_RootOrder: 3
 --- !u!1001 &705638721
 Prefab:
   m_ObjectHideFlags: 0
@@ -1325,6 +809,48 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2, y: 1.89999998}
+--- !u!1001 &823970775
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 412516, guid: fd0fbd65e8dbb2f4c8929081a70a3f40, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 412516, guid: fd0fbd65e8dbb2f4c8929081a70a3f40, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.649999976
+      objectReference: {fileID: 0}
+    - target: {fileID: 412516, guid: fd0fbd65e8dbb2f4c8929081a70a3f40, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 412516, guid: fd0fbd65e8dbb2f4c8929081a70a3f40, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 412516, guid: fd0fbd65e8dbb2f4c8929081a70a3f40, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 412516, guid: fd0fbd65e8dbb2f4c8929081a70a3f40, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 412516, guid: fd0fbd65e8dbb2f4c8929081a70a3f40, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 412516, guid: fd0fbd65e8dbb2f4c8929081a70a3f40, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: fd0fbd65e8dbb2f4c8929081a70a3f40, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &839280107
 Prefab:
   m_ObjectHideFlags: 0
@@ -1379,60 +905,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 441588, guid: 45ff2aa26b155614ba01d313044908eb, type: 2}
   m_PrefabInternal: {fileID: 1992359013}
---- !u!1 &893890377
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 893890378}
-  - 212: {fileID: 893890379}
-  m_Layer: 0
-  m_Name: BacteriaGraphic
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &893890378
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 893890377}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .400000006, y: .400000006, z: 1}
-  m_Children: []
-  m_Father: {fileID: 65057683}
-  m_RootOrder: 0
---- !u!212 &893890379
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 893890377}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 0
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1024582385
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c393a86c43d74e44babf606ba548d02d, type: 3}
-  m_Color: {r: .678296208, g: .551470578, b: 1, a: 1}
 --- !u!1001 &982374082
 Prefab:
   m_ObjectHideFlags: 0
@@ -1515,6 +987,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71abae309ac730344946aa5139f1e7f6, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1000181965
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1718752995}
+    m_Modifications:
+    - target: {fileID: 429436, guid: c12ba07f9b8fbc34da211680125e6ebd, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 429436, guid: c12ba07f9b8fbc34da211680125e6ebd, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 429436, guid: c12ba07f9b8fbc34da211680125e6ebd, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 429436, guid: c12ba07f9b8fbc34da211680125e6ebd, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 429436, guid: c12ba07f9b8fbc34da211680125e6ebd, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 429436, guid: c12ba07f9b8fbc34da211680125e6ebd, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 429436, guid: c12ba07f9b8fbc34da211680125e6ebd, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 429436, guid: c12ba07f9b8fbc34da211680125e6ebd, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c12ba07f9b8fbc34da211680125e6ebd, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1059122001
 Prefab:
   m_ObjectHideFlags: 0
@@ -1557,127 +1071,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27f0d3c57359a4c4c9d1fedf405bf7f2, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1115018990
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1115018991}
-  - 58: {fileID: 1115018994}
-  - 114: {fileID: 1115018993}
-  - 58: {fileID: 1115018992}
-  m_Layer: 0
-  m_Name: BacteriaHead
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1115018991
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1115018990}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 609761847}
-  m_RootOrder: 1
---- !u!58 &1115018992
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1115018990}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 8f0fca7fbdec8f24ebadee58c0a80e28, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .150000006}
-  serializedVersion: 2
-  m_Radius: .25
---- !u!114 &1115018993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1115018990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c68965f00e374048a89dea7301d9550, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!58 &1115018994
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1115018990}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 24ac79603fb61400588e37d9f6fe952a, type: 2}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .150000006}
-  serializedVersion: 2
-  m_Radius: .25
---- !u!1 &1150259662
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1150259663}
-  - 212: {fileID: 1150259664}
-  m_Layer: 0
-  m_Name: BacteriaGraphic
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1150259663
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1150259662}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .400000006, y: .400000006, z: 1}
-  m_Children: []
-  m_Father: {fileID: 609761847}
-  m_RootOrder: 0
---- !u!212 &1150259664
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1150259662}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 0
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1024582385
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c393a86c43d74e44babf606ba548d02d, type: 3}
-  m_Color: {r: .678296208, g: .551470578, b: 1, a: 1}
 --- !u!1 &1189501730
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,6 +1536,7 @@ Transform:
   - {fileID: 484299718}
   - {fileID: 1595068433}
   - {fileID: 2095324374}
+  - {fileID: 527335146}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!1 &1904200802

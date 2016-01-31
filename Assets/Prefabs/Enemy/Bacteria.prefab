@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 466598}
   - 212: {fileID: 21221428}
+  - 111: {fileID: 11112204}
   m_Layer: 0
   m_Name: BacteriaGraphic
   m_TagString: Untagged
@@ -159,6 +160,21 @@ BoxCollider2D:
   m_Offset: {x: -0, y: -.140000001}
   serializedVersion: 2
   m_Size: {x: .699999988, y: .5}
+--- !u!111 &11112204
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131916}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: af60e4c0e1fa66e4fafa6a17be5ead04, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: af60e4c0e1fa66e4fafa6a17be5ead04, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &11414198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,7 +202,7 @@ MonoBehaviour:
   bounceWait: 2
   paceArchWait: 0
   paceArchForce: 100
-  chaseDelay: 0
+  chaseDelay: 1
   chaseWait: 2
   chaseArchWait: .200000003
 --- !u!212 &21221428
@@ -221,7 +237,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: jumpHeight
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: chaseDelay
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 179370}
