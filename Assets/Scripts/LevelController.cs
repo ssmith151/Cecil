@@ -2,62 +2,27 @@
 using System.Collections;
 using UnityEngine.UI;
 
-
-public class LevelController : MonoBehaviour
-{
+public class LevelController : MonoBehaviour {
 
     public bool sunny;
     public bool water;
     public GameObject character;
+    private PlayerControl CC;
     public SpriteRenderer dialogBubble;
     public Vector2 offSetPosition;
     public float fadeDelay;
     public float dialogWait;
     public float dialogScrollTime;
     public Text dialogText;
-
-    private Text scoreText;
     private GameObject dialogGO;
-    private PlayerControl CC;
-    private int score;
-    private AudioSource audioSource;
 
-    void Awake()
+    void Awake ()
     {
-        audioSource = GetComponent<AudioSource>();
         dialogGO = GameObject.Find("Dialog");
         CC = character.GetComponent<PlayerControl>();
         dialogGO.SetActive(false);
-        scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
     }
-    public void AddPoints(int pointsIn)
-    {
-        audioSource.PlayOneShot(audioSource.clip, Random.Range(0.4f, 0.7f));
-        score += pointsIn;
-        scoreText.text = "Score : " + score;
-    }
-    public void HelpPanel(GameObject helpPanel, string title, string pOne, string pTwo, string pThree)
-    {
-        helpPanel.SetActive(true);
-        Debug.Log(helpPanel.name);
-        RectTransform[] rects = helpPanel.GetComponentsInChildren<RectTransform>();
-        Text[] menuTexts = new Text[5];
-        int counter = 0;
-        foreach (RectTransform rect in rects)
-        {
-            if (rect.GetComponentInChildren<Text>() != null && counter < 5)
-            {
-                Debug.Log("show log");
-                menuTexts[counter] = rect.gameObject.GetComponentInChildren<Text>();
-                counter++;
-            }
-        }
-        menuTexts[0].text = title;
-        menuTexts[1].text = pOne;
-        menuTexts[2].text = pTwo;
-        menuTexts[3].text = pThree;
-        menuTexts[4].text = "Okay";
-    }
+
     public void Conversation(GameObject talker, string dialog, bool makeStop, int stopTime)
     {
         if (dialogGO.activeSelf)
@@ -71,10 +36,10 @@ public class LevelController : MonoBehaviour
         if (dialog.Length > 16)
             dialog = DialogChop(dialog);
         dialogGO.SetActive(true);
-        StartCoroutine(Fader(true));
+        StartCoroutine( Fader(true));
         dialogGO.transform.position = new Vector3(talker.transform.position.x, talker.transform.position.y + 1.0f, talker.transform.position.z);
         dialogGO.transform.SetParent(talker.transform);
-        //    StartCoroutine(FlipChecker());
+    //    StartCoroutine(FlipChecker());
         StartCoroutine(AnimateText(dialog));
     }
     string DialogChop(string dialog)
@@ -86,12 +51,11 @@ public class LevelController : MonoBehaviour
         {
             counter += s.Length;
             //Debug.Log(s + " is " + s.Length + " and the count is " + counter);
-            if (counter > 14 && s != dialogWords[dialogWords.Length - 1])
+            if (counter > 14  && s != dialogWords[dialogWords.Length - 1])
             {
                 newDialog += s + System.Environment.NewLine;
                 counter = 0;
-            }
-            else
+            } else
             {
                 newDialog += s + " ";
             }
@@ -129,8 +93,7 @@ public class LevelController : MonoBehaviour
         {
             dialogPart += dialogComplete[i];
             dialogText.text = dialogPart;
-            if (i > 12)
-            {
+            if (i > 12) {
                 dialogBubbleWidth = dialogPart.Length / 8.0f;
                 dialogBubbleWidth = Mathf.Clamp(dialogBubbleWidth, 1.0f, 2.5f);
             }
@@ -152,8 +115,7 @@ public class LevelController : MonoBehaviour
             dialogText.rectTransform.localScale = new Vector3(-dialogText.rectTransform.localScale.x *
                 Mathf.Sign(dialogText.rectTransform.localScale.x),
                 dialogText.rectTransform.localScale.y, dialogText.rectTransform.localScale.z);
-        }
-        else
+        } else
         {
             dialogText.rectTransform.localScale = new Vector3(dialogText.rectTransform.localScale.x *
                 Mathf.Sign(dialogText.rectTransform.localScale.x),
@@ -174,8 +136,7 @@ public class LevelController : MonoBehaviour
                 dialogBubble.color = fadeColorBubble;
                 yield return new WaitForSeconds(0.02f);
             }
-        }
-        else
+        } else
         {
             for (float i = 10; i >= 0; i--)
             {
