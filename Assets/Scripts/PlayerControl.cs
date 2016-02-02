@@ -28,7 +28,7 @@ public class PlayerControl : MonoBehaviour
     public bool walled = false;             // Ya know, walls and shit
     private Rigidbody2D rb;                 // Unity 5.0 Correction reference            
     private float samePositionY;            // sets a float every fixed update to keep character falling on a wall
-    //private Animator anim;				// Reference to the player's animator component.
+    private Animator anim;				    // Reference to the player's animator component.
     private float sunExposure = 100f;
     private float health = 100f;
     private bool inShade;
@@ -74,7 +74,7 @@ public class PlayerControl : MonoBehaviour
         groundCheck = transform.Find("GroundCheck");
         //characterRender = gameObject.GetComponent<SpriteRenderer>();
         wallCheck = wallGOCheck.transform;
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         if (levelController.sunny)
             InvokeRepeating("SunDamage", 5, 1);
     }
@@ -109,6 +109,8 @@ public class PlayerControl : MonoBehaviour
     {
         // Cache the horizontal input.
         float h = Input.GetAxis("Horizontal");
+        // The Speed animator parameter is set to the absolute value of the horizontal input.
+        anim.SetFloat("speed", Mathf.Abs(h));
         if (groundedLastFrame)
         {
             grounded = groundSpace.IsTouchingLayers(groundLayer);
@@ -119,7 +121,6 @@ public class PlayerControl : MonoBehaviour
             grounded = groundSpace.IsTouchingLayers(groundLayer);
             groundedLastFrame = true;
         }
-
         if (!walled && !grounded)
         {
             // without next switch the character cannot switch directions in midair, possibly a good thing
@@ -131,6 +132,7 @@ public class PlayerControl : MonoBehaviour
                 groundthrust = true;
             }
         }
+        anim.SetBool("grounded", grounded);
         if (!playerCanMove)
         {
             h = 0;
@@ -142,9 +144,6 @@ public class PlayerControl : MonoBehaviour
                 h = 0;
             }
         }
-
-        // The Speed animator parameter is set to the absolute value of the horizontal input.
-        //anim.SetFloat("Speed", Mathf.Abs(h));
 
         // If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
         if (h * rb.velocity.x < maxSpeed)
@@ -169,8 +168,6 @@ public class PlayerControl : MonoBehaviour
         // If the player should jump and isn't stuck/Immovable
         if (jump && playerCanMove)
         {
-            // Set the Jump animator trigger parameter.
-            //anim.SetTrigger("Jump");
             float i = Random.Range(-0.4f, -0.2f);
             audSorce.pitch = 1 + i;
             audSorce.PlayOneShot(audClips[0], 0.3f);
