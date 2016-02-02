@@ -40,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.526433, y: -0.94388115, z: 0}
+  m_LocalPosition: {x: 8, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 468962}
@@ -54,7 +54,7 @@ Transform:
   m_GameObject: {fileID: 103950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.36, y: 0.36, z: 1}
+  m_LocalScale: {x: .360000014, y: .360000014, z: 1}
   m_Children: []
   m_Father: {fileID: 441588}
   m_RootOrder: 0
@@ -65,7 +65,6 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149860}
   m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
@@ -86,10 +85,11 @@ MonoBehaviour:
   pointAmount: 100
   rotateAngle: 10
   rotateSpeed: 20
-  bobHeight: 0.1
-  bobSpeed: 0.1
-  timer: 0.05
+  bobHeight: .100000001
+  bobSpeed: .100000001
+  timer: .0500000007
   itemIndex: 1
+  notification: {fileID: 148996, guid: 19fad716a8b728240958bec90ca99211, type: 2}
 --- !u!212 &21204020
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -108,25 +108,25 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1783731295
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ab5b1f0bde1fd4ac4aaf8f6a022ba0be, type: 3}
-  m_Color: {r: 0.72372407, g: 0.785934, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: notification
+      value: 
+      objectReference: {fileID: 148996, guid: 19fad716a8b728240958bec90ca99211, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 149860}
