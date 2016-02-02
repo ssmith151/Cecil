@@ -10,12 +10,9 @@ public class PickupCollect : MonoBehaviour {
     public float bobSpeed;
     public float timer;
     public int itemIndex;
-    public GameObject notification;
-    private LevelController LC;
 
     void Start()
     {
-        LC = FindObjectOfType<LevelController>();
         StartCoroutine(wiggleAnimation());
     }
     IEnumerator wiggleAnimation()
@@ -39,9 +36,7 @@ public class PickupCollect : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            LC.AddPoints(pointAmount);
-            GameObject not = Instantiate(notification, transform.position, Quaternion.identity) as GameObject;
-            not.GetComponentInChildren<DestroyTime>().notificationMessage = pointAmount.ToString();
+            other.GetComponent<PlayerControl>().SendMessage("AddPoints", pointAmount);
             Destroy(gameObject);
         }
     }

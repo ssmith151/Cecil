@@ -21,12 +21,10 @@ public class BouncyEnemy : MonoBehaviour
     private bool facingRight;
     private bool chasing;
     private bool dying;
-    private AudioSource audioSource;
 
     // Use this for initialization
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
         dying = false;
         rb = gameObject.GetComponent<Rigidbody2D>();
         startPosition = gameObject.transform.position;
@@ -52,8 +50,6 @@ public class BouncyEnemy : MonoBehaviour
             if (facingRight)
                 Flip();
         }
-        audioSource.pitch = Random.Range(0.8f, 1.1f);
-        audioSource.PlayOneShot(audioSource.clip, 0.3f);
         StartCoroutine(Arch(paceArchWait, currentArchDir));
     }
     IEnumerator Arch(float archWait, float archForce)
@@ -119,8 +115,6 @@ public class BouncyEnemy : MonoBehaviour
                 if (facingRight)
                     Flip();
             }
-            audioSource.pitch = Random.Range(0.6f, 1.1f);
-            audioSource.PlayOneShot(audioSource.clip, 0.6f);
             StartCoroutine(Arch(chaseArchWait, currentArchDir));
             yield return new WaitForSeconds(chaseWait);
             if (GO != null)
