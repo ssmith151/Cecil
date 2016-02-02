@@ -17,14 +17,12 @@ public class CameraFollow : MonoBehaviour
     private float zoomLevel;        // global reference to the camera zoom.
     private Camera mainCamera;       // the ref to the main camera for stuff
 
-
-	void Awake ()
+	void Start ()
 	{
         // Setting up the reference.
         zoomLevel = 5.0f;
 		player = GameObject.FindGameObjectWithTag("Player").transform;
         mainCamera = gameObject.GetComponent<Camera>();
-
     }
 
 

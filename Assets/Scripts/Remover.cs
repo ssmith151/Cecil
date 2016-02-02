@@ -8,6 +8,8 @@ public class Remover : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
+        if (col.CompareTag("Enemy"))
+            Destroy(col.gameObject);
 		// If the player hits the trigger...
 		if(col.CompareTag("Player"))
 		{

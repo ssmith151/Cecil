@@ -11,13 +11,13 @@ public class PlayerControl : MonoBehaviour
     public GameObject wallGOCheck;          // GameObject to collect the reference to get transform, for walls ya know
     public GameObject levelControlGO;
     public Collider2D triggerCollider;
-    public float moveForce = 365f;          // Amount of force added to move the player left and right.
-    public float maxSpeed = 5f;             // The fastest the player can travel in the x axis.
-                                            //public AudioClip[] jumpClips;			// Array of clips for when the player jumps.
-    public float jumpForce = 1000f;         // Amount of force added when the player jumps.
-                                            //public AudioClip[] taunts;				// Array of clips for when the player taunts.
-                                            //public float tauntProbability = 50f;	// Chance of a taunt happening.
-                                            //public float tauntDelay = 1f;			// Delay for when the taunt should happen.
+    public float moveForce;          // Amount of force added to move the player left and right.
+    public float maxSpeed;             // The fastest the player can travel in the x axis.
+                                       //public AudioClip[] jumpClips;			// Array of clips for when the player jumps.
+    public float jumpForce;         // Amount of force added when the player jumps.
+                                    //public AudioClip[] taunts;				// Array of clips for when the player taunts.
+                                    //public float tauntProbability = 50f;	// Chance of a taunt happening.
+                                    //public float tauntDelay = 1f;			// Delay for when the taunt should happen.
     private MainMenuController inGameMenu;  //reference to the main menu controller on canvas
     private LevelController levelController;
 
@@ -34,7 +34,6 @@ public class PlayerControl : MonoBehaviour
     private bool inShade;
     private bool sunscreen;
     public float melatonin = 0.0f;
-    private Image sunBar;
     private Image sunScreenTimer;
     private Image healthBar;
     private LayerMask shadeLayer;
@@ -44,24 +43,31 @@ public class PlayerControl : MonoBehaviour
     private bool groundClose;
     public bool groundthrust;
     private bool groundedLastFrame;
-    public SpriteRenderer characterRender;
+    private SpriteRenderer characterRender;
     public AudioSource audSorce;
+    public AudioClip[] audClips;
     public bool playerCanMove;
+    //[HideInInspector]
+    public bool enemyBounce;
+    private bool invulnerable;
+    private bool alive;
 
     void Awake()
     {
+        enemyBounce = false;
+        alive = true;
+        characterRender = GameObject.Find("PlayerBody").GetComponent<SpriteRenderer>();
         playerCanMove = true;
         inShade = false;
         sunscreen = false;
         groundedLastFrame = false;
         healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
-        sunBar = GameObject.Find("SunDamageBar").GetComponent<Image>();
         sunScreenTimer = GameObject.Find("SunscreenTimer").GetComponent<Image>();
         shadeLayer = LayerMask.GetMask("Shade");
         groundLayer = LayerMask.GetMask("Ground");
         //charBottom = gameObject.GetComponent<CircleCollider2D>();
         // Setting up references.
-        Canvas canvas = FindObjectOfType<Canvas>();
+        Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         inGameMenu = canvas.GetComponent<MainMenuController>();
         levelController = levelControlGO.GetComponent<LevelController>();
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -90,7 +96,6 @@ public class PlayerControl : MonoBehaviour
         {
             groundthrust = false;
         }
-
         // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
         groundClose = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
         walled = Physics2D.Linecast(transform.position, wallCheck.position, 1 << LayerMask.NameToLayer("Ground"));
@@ -108,7 +113,8 @@ public class PlayerControl : MonoBehaviour
         {
             grounded = groundSpace.IsTouchingLayers(groundLayer);
             groundedLastFrame = false;
-        } else
+        }
+        else
         {
             grounded = groundSpace.IsTouchingLayers(groundLayer);
             groundedLastFrame = true;
@@ -121,7 +127,7 @@ public class PlayerControl : MonoBehaviour
                 h = 0;
             if (groundClose && !groundthrust)
             {
-                rb.AddForce(new Vector2(0.0f,rb.velocity.y * -2.0f));
+                rb.AddForce(new Vector2(0.0f, rb.velocity.y * -2.0f));
                 groundthrust = true;
             }
         }
@@ -165,17 +171,21 @@ public class PlayerControl : MonoBehaviour
         {
             // Set the Jump animator trigger parameter.
             //anim.SetTrigger("Jump");
-
-            // Play a random jump audio clip.
-            float i = Random.Range(-0.8f, 0.0f);
+            float i = Random.Range(-0.4f, -0.2f);
             audSorce.pitch = 1 + i;
-            audSorce.Play();
+            audSorce.PlayOneShot(audClips[0], 0.3f);
 
             // Add a vertical force to the player.
+            // if (rb.velocity.y <= jumpForce)    Does not fix super jump
             rb.AddForce(new Vector2(0f, jumpForce));
 
             // Make sure the player can't jump again until the jump conditions from Update are satisfied.
             jump = false;
+        }
+        if (Input.GetButton("Jump") && enemyBounce)
+        {
+            enemyBounce = false;
+            rb.AddForce(new Vector2(0f, jumpForce*1.5f));
         }
         samePositionY = gameObject.transform.position.y;
     }
@@ -194,18 +204,19 @@ public class PlayerControl : MonoBehaviour
     void SunDamage()
     {
         inShade = triggerCollider.IsTouchingLayers(shadeLayer);
-        if (!inShade & melatonin <= 0 )
+        if (!inShade & melatonin <= 0)
         {
             sunExposure -= 4;
             // find out how to use layer mask to make the inshade bool
-        } else
+        }
+        else
         {
             sunExposure += 12;
         }
         sunExposure = Mathf.Clamp(sunExposure, -1, 100.0f);
         if (sunExposure <= 0)
             TakeDamage(10.0f);
-        sunBar.fillAmount = sunExposure / 100.0f;
+        //sunBar.fillAmount = sunExposure / 100.0f;
         characterRender.material.color = Color.Lerp(Color.red, Color.white, (sunExposure / 100.0f));
     }
     void SunscreenCounter()
@@ -230,33 +241,126 @@ public class PlayerControl : MonoBehaviour
     }
     public void TakeDamage(float damageIn)
     {
+        if (invulnerable)
+            return;
         health -= damageIn;
         healthBar.fillAmount = health / 100.0f;
         Mathf.Clamp(health, 0, 100);
         // play an audioclip
-        if (health <= 0)
+        audSorce.pitch = Random.Range(0.8f, 1.1f);
+        audSorce.PlayOneShot(audClips[5], 0.9f);
+        StartCoroutine(DamageShield(0.2f));
+        if (health <= 0 && alive)
         {
+            alive = false;
+            PlayerDeath();
             StartCoroutine(ReloadGame());
+            StopPlayer(3);
         }
+    }
+    public void DrownDamage()
+    {
+        health -= 2;
+        healthBar.fillAmount = health / 100.0f;
+        Mathf.Clamp(health, 0, 100);
+        // play an audioclip
+        StartCoroutine(DamageShield(0.2f));
+        if (health <= 0 && alive)
+        {
+            alive = false;
+            PlayerDrown();
+            StartCoroutine(ReloadGame());
+            StopPlayer(3);
+        }
+    }
+    IEnumerator DamageShield(float waitUntil)
+    {
+        if (health <= 0)
+            yield return null;
+        Color preDamageColor = characterRender.material.color;
+        characterRender.material.color = Color.red;
+        invulnerable = true;
+        yield return new WaitForSeconds(waitUntil);
+        invulnerable = false;
+        characterRender.material.color = preDamageColor;
+    }
+    void PlayerDeath()
+    {
+        // play death noise
+        //play death animation
+        Collider2D[] playerColls = GetComponents<Collider2D>();
+        foreach (Collider2D col in playerColls)
+        {
+            col.isTrigger = true;
+        }
+        SpriteRenderer[] playerSprites = GetComponents<SpriteRenderer>();
+        foreach (SpriteRenderer spr in playerSprites)
+        {
+            spr.sortingLayerName = "UI";
+        }
+        Camera.main.GetComponent<CameraFollow>().enabled = false;
+    }
+    void PlayerDrown()
+    {
+        // play drown noise
+        audSorce.pitch = 1.0f;
+        audSorce.PlayOneShot(audClips[1], 1.5f);
+        //play drown animation
+        Collider2D[] playerColls = GetComponents<Collider2D>();
+        foreach (Collider2D col in playerColls)
+        {
+            col.isTrigger = true;
+        }
+        rb.velocity = new Vector2(0.0f, 0.0f);
+        SpriteRenderer[] playerSprites = GetComponents<SpriteRenderer>();
+        foreach (SpriteRenderer spr in playerSprites)
+        {
+            spr.sortingLayerName = "UI";
+        }
+        Camera.main.GetComponent<CameraFollow>().enabled = false;
+        StartCoroutine(DrownMove());
+    }
+    IEnumerator DrownMove()
+    {
+        rb.gravityScale = 0.00f;
+        float startY = transform.position.y;
+        while (true)
+        {
+            transform.position = Vector3.MoveTowards(transform.position,
+                new Vector3(transform.position.x, startY + Mathf.Sin(Time.time),
+                transform.position.z), 0.01f);
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+    public void AddHealth(float healthIn)
+    {
+        health += healthIn;
+        healthBar.fillAmount = health / 100.0f;
+        Mathf.Clamp(health, 0, 100);
+        // play an audioclip
+        audSorce.pitch = 1.0f;
+        audSorce.PlayOneShot(audClips[2], 1.0f);
     }
     IEnumerator ReloadGame()
     {
-        // ... pause briefly
-        yield return new WaitForSeconds(2);
+        // ... pause briefly and play gameover noise
+        audSorce.pitch = 1.0f;
+        audSorce.PlayOneShot(audClips[3], 2.0f);
+        yield return new WaitForSeconds(3);
         // ... and then reload the level.
         Application.LoadLevel(Application.loadedLevel);
     }
-    public void StopPlayer()
+    public void StopPlayer(int stopTime)
     {
         if (playerCanMove)
         {
-            StartCoroutine(StopPlayerCo());
+            StartCoroutine(StopPlayerCo(stopTime));
         }
     }
-    IEnumerator StopPlayerCo()
+    IEnumerator StopPlayerCo(int stopTime)
     {
         playerCanMove = false;
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(stopTime);
         playerCanMove = true;
     }
 }
