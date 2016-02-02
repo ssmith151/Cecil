@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HealthPickup : MonoBehaviour
 {
-
+    public GameObject notification;
     public int healthAmount;
     public int rotateAngle;
     public float rotateSpeed;
@@ -37,6 +37,7 @@ public class HealthPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerControl>().SendMessage("AddHealth", 10);
+            Instantiate(notification, gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
