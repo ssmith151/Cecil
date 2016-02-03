@@ -47,7 +47,6 @@ public class LevelController : MonoBehaviour
         {
             if (rect.GetComponentInChildren<Text>() != null && counter < 5)
             {
-                Debug.Log("show log");
                 menuTexts[counter] = rect.gameObject.GetComponentInChildren<Text>();
                 counter++;
             }

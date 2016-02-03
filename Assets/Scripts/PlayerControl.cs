@@ -213,7 +213,6 @@ public class PlayerControl : MonoBehaviour
         sunExposure = Mathf.Clamp(sunExposure, -1, 100.0f);
         if (sunExposure <= 0)
             TakeDamage(10.0f);
-        //sunBar.fillAmount = sunExposure / 100.0f;
         characterRender.material.color = Color.Lerp(Color.red, Color.white, (sunExposure / 100.0f));
     }
     void SunscreenCounter()
@@ -245,7 +244,7 @@ public class PlayerControl : MonoBehaviour
         Mathf.Clamp(health, 0, 100);
         // play an audioclip
         audSorce.pitch = Random.Range(0.8f, 1.1f);
-        audSorce.PlayOneShot(audClips[5], 0.9f);
+        audSorce.PlayOneShot(audClips[5], 1.0f);
         StartCoroutine(DamageShield(0.2f));
         if (health <= 0 && alive)
         {
@@ -336,7 +335,7 @@ public class PlayerControl : MonoBehaviour
         Mathf.Clamp(health, 0, 100);
         // play an audioclip
         audSorce.pitch = 1.0f;
-        audSorce.PlayOneShot(audClips[2], 1.0f);
+        audSorce.PlayOneShot(audClips[2], 0.10f);
     }
     IEnumerator ReloadGame()
     {
