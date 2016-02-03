@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd0b26e03893c544b53b55191c21438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notification: {fileID: 167500, guid: 7138d7e6948e6704ca6caff1bb7a5bcc, type: 2}
   healthAmount: 5
   rotateAngle: 15
   rotateSpeed: 15
