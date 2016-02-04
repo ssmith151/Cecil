@@ -7734,7 +7734,7 @@ MonoBehaviour:
   water: 0
   character: {fileID: 105856732}
   dialogBubble: {fileID: 167819821}
-  offSetPosition: {x: 0, y: 0}
+  offSetPosition: {x: 0, y: 2}
   fadeDelay: 0
   dialogScrollTime: 0.2
   dialogText: {fileID: 337904373}
@@ -21619,7 +21619,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11459422, guid: b0a447614aa76d143995ce62440f8ae0, type: 2}
       propertyPath: speech
-      value: Shade!  Standing in this will help the sunburn.
+      value: Shade!  Standing in this will keep me cool.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0a447614aa76d143995ce62440f8ae0, type: 2}
