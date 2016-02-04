@@ -1004,6 +1004,10 @@ Prefab:
       propertyPath: orthographic size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8265710, guid: 4bf1160870c4c87439d306462b895d44, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f68cd9b2661205f4da33c10c2a755b7f, type: 3}
     m_RemovedComponents:
     - {fileID: 11406902, guid: 4bf1160870c4c87439d306462b895d44, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4bf1160870c4c87439d306462b895d44, type: 2}
