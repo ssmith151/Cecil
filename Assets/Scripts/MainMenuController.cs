@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class MainMenuController : MonoBehaviour {
     public GameObject levelMenu;
     public GameObject thisMenu;
     public GameObject border;
+    public GameObject blackOverlay;
     public PlayerControl gc;
     public bool menuOpen;
 
@@ -18,7 +20,39 @@ public class MainMenuController : MonoBehaviour {
         }
         menuOpen = false;
     }
-
+    void Start()
+    {
+        StartCoroutine(Fader(true));
+    }
+    IEnumerator Fader(bool darker)
+    {
+        if (darker)
+        {
+            blackOverlay.SetActive(true);
+            yield return StartCoroutine(ColorFadeIn(0.5f));
+        } else
+        {
+            blackOverlay.SetActive(true);
+            yield return StartCoroutine(ColorFadeOut(0.5f));
+        }
+    }
+    IEnumerator ColorFadeOut(float speed)
+    {
+        for (int i = 1; i <= 60; i++)
+        {
+            blackOverlay.GetComponent<Image>().color = Color.Lerp(Color.clear, Color.black, i / 40.0f);
+            yield return new WaitForSeconds(speed * 0.05f);
+        }
+    }
+    IEnumerator ColorFadeIn(float speed)
+    {
+        for (int i = 1; i <= 60; i++)
+        {
+            blackOverlay.GetComponent<Image>().color = Color.Lerp(Color.black, Color.clear, i / 40.0f);
+            yield return new WaitForSeconds(speed * 0.05f);
+        }
+        blackOverlay.SetActive(false);
+    }
     public void OnBackToMain()
     {
         thisMenu.SetActive(false);
@@ -49,12 +83,19 @@ public class MainMenuController : MonoBehaviour {
     public void OnStartGame()
     {
         PlayerPrefs.SetInt("HighScore", 0);
-        Application.LoadLevel(1);
+        StartCoroutine(Fader(false));
+        StartCoroutine(DelayLoad(1));
     }
     public void LoadLevel(int levelToLoad)
     {
         Time.timeScale = 1;
-         Application.LoadLevel(levelToLoad);
+        StartCoroutine(Fader(false));
+        StartCoroutine(DelayLoad(levelToLoad));
+    }
+    IEnumerator DelayLoad(int levelNo)
+    {
+        yield return new WaitForSeconds(3.0f);
+        Application.LoadLevel(levelNo);
     }
     public void OnExitGame()
     {
