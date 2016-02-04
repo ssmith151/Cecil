@@ -12,11 +12,11 @@ public class LevelController : MonoBehaviour
     public SpriteRenderer dialogBubble;
     public Vector2 offSetPosition;
     public float fadeDelay;
-    public float dialogWait;
     public float dialogScrollTime;
     public Text dialogText;
 
     private Text scoreText;
+    private float dialogWait;
     private GameObject dialogGO;
     private PlayerControl CC;
     private int score;
@@ -38,14 +38,17 @@ public class LevelController : MonoBehaviour
     }
     public void HelpPanel(GameObject helpPanel, string title, string pOne, string pTwo, string pThree)
     {
+        if (helpPanel.activeSelf)
+        {
+            return;
+        }
         helpPanel.SetActive(true);
-        Debug.Log(helpPanel.name);
         RectTransform[] rects = helpPanel.GetComponentsInChildren<RectTransform>();
         Text[] menuTexts = new Text[5];
         int counter = 0;
         foreach (RectTransform rect in rects)
         {
-            if (rect.GetComponentInChildren<Text>() != null && counter < 5)
+            if (rect.gameObject.GetComponent<Text>() != null && counter < 5)
             {
                 menuTexts[counter] = rect.gameObject.GetComponentInChildren<Text>();
                 counter++;
@@ -63,9 +66,11 @@ public class LevelController : MonoBehaviour
         {
             return;
         }
+        dialogWait = dialog.Length / 40.0f;
         if (makeStop)
         {
             CC.StopPlayer(stopTime);
+            dialogWait = dialog.Length / 18.0f;
         }
         if (dialog.Length > 16)
             dialog = DialogChop(dialog);
@@ -114,6 +119,7 @@ public class LevelController : MonoBehaviour
     //}
     IEnumerator EndBubble()
     {
+        InvokeRepeating("TextFixer", 0.0f, 0.05f);
         yield return new WaitForSeconds(dialogWait);
         yield return StartCoroutine(Fader(false));
         dialogBubble.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);

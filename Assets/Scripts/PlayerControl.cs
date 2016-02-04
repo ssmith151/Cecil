@@ -44,6 +44,7 @@ public class PlayerControl : MonoBehaviour
     public bool groundthrust;
     private bool groundedLastFrame;
     private SpriteRenderer characterRender;
+    private SpriteRenderer cytosolRenderer;
     public AudioSource audSorce;
     public AudioClip[] audClips;
     public bool playerCanMove;
@@ -57,6 +58,7 @@ public class PlayerControl : MonoBehaviour
         enemyBounce = false;
         alive = true;
         characterRender = GameObject.Find("PlayerBody").GetComponent<SpriteRenderer>();
+        cytosolRenderer = GameObject.Find("Cytosol").GetComponent<SpriteRenderer>();
         playerCanMove = true;
         inShade = false;
         sunscreen = false;
@@ -110,7 +112,6 @@ public class PlayerControl : MonoBehaviour
         // Cache the horizontal input.
         float h = Input.GetAxis("Horizontal");
         // The Speed animator parameter is set to the absolute value of the horizontal input.
-        anim.SetFloat("speed", Mathf.Abs(h));
         if (groundedLastFrame)
         {
             grounded = groundSpace.IsTouchingLayers(groundLayer);
@@ -144,7 +145,7 @@ public class PlayerControl : MonoBehaviour
                 h = 0;
             }
         }
-
+        anim.SetFloat("speed", Mathf.Abs(h));
         // If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
         if (h * rb.velocity.x < maxSpeed)
             // ... add a force to the player.
@@ -212,9 +213,26 @@ public class PlayerControl : MonoBehaviour
         }
         sunExposure = Mathf.Clamp(sunExposure, -1, 100.0f);
         if (sunExposure <= 0)
+        {
             TakeDamage(10.0f);
+            StartCoroutine(DamageFromSun());
+        }
         characterRender.material.color = Color.Lerp(Color.red, Color.white, (sunExposure / 100.0f));
     }
+    IEnumerator DamageFromSun()
+    {
+        if (health <= 0)
+        {
+            yield break;
+        }
+        Color preDamageColor = cytosolRenderer.material.color;
+        cytosolRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        cytosolRenderer.material.color = preDamageColor;
+    }
+    // try to use a image and use alpha in this from another texture
+    // link the texture to an animator and use that lavvue in animation
+    // OR use an overlay on the GameObject and create alpha with reduction
     void SunscreenCounter()
     {
         melatonin -= 1;
@@ -243,6 +261,7 @@ public class PlayerControl : MonoBehaviour
         healthBar.fillAmount = health / 100.0f;
         Mathf.Clamp(health, 0, 100);
         // play an audioclip
+        anim.SetTrigger("TookDamage");
         audSorce.pitch = Random.Range(0.8f, 1.1f);
         audSorce.PlayOneShot(audClips[5], 1.0f);
         StartCoroutine(DamageShield(0.2f));
@@ -256,6 +275,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void DrownDamage()
     {
+        anim.SetTrigger("TookDamage");
         health -= 2;
         healthBar.fillAmount = health / 100.0f;
         Mathf.Clamp(health, 0, 100);
@@ -272,13 +292,16 @@ public class PlayerControl : MonoBehaviour
     IEnumerator DamageShield(float waitUntil)
     {
         if (health <= 0)
-            yield return null;
+        {
+            yield break;
+        }
         Color preDamageColor = characterRender.material.color;
         characterRender.material.color = Color.red;
         invulnerable = true;
         yield return new WaitForSeconds(waitUntil);
         invulnerable = false;
         characterRender.material.color = preDamageColor;
+        anim.ResetTrigger("TookDamage");
     }
     void PlayerDeath()
     {
