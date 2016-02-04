@@ -48,6 +48,7 @@ public class MainMenuController : MonoBehaviour {
     }
     public void OnStartGame()
     {
+        PlayerPrefs.SetInt("HighScore", 0);
         Application.LoadLevel(1);
     }
     public void LoadLevel(int levelToLoad)
