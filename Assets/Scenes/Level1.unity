@@ -6767,6 +6767,10 @@ Prefab:
     - target: {fileID: 11436068, guid: 04403bf2f6c26414e8d7534120aca77c, type: 2}
       propertyPath: blackOverlay
       value: 
+      objectReference: {fileID: 820525768}
+    - target: {fileID: 11436068, guid: 04403bf2f6c26414e8d7534120aca77c, type: 2}
+      propertyPath: slowfade
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04403bf2f6c26414e8d7534120aca77c, type: 2}
@@ -16200,6 +16204,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71abae309ac730344946aa5139f1e7f6, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &820525768 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 164434, guid: 71abae309ac730344946aa5139f1e7f6, type: 2}
+  m_PrefabInternal: {fileID: 820525767}
 --- !u!1001 &821102811
 Prefab:
   m_ObjectHideFlags: 0
