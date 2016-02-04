@@ -22,7 +22,6 @@ public class CameraFollow : MonoBehaviour
         // Setting up the reference.
         zoomLevel = 5.0f;
 		player = GameObject.Find("Character");
-        Debug.Log(player.name);
         mainCamera = gameObject.GetComponent<Camera>();
     }
 
