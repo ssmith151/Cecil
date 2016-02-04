@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class LevelController : MonoBehaviour
 {
-
     public bool sunny;
     public bool water;
     public GameObject character;
@@ -21,6 +20,7 @@ public class LevelController : MonoBehaviour
     private PlayerControl CC;
     private int score;
     private AudioSource audioSource;
+    string highScoreKey = "HighScore";
 
     void Awake()
     {
@@ -29,6 +29,13 @@ public class LevelController : MonoBehaviour
         CC = character.GetComponent<PlayerControl>();
         dialogGO.SetActive(false);
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
+        PlayerPrefs.GetInt(highScoreKey, 0);
+        score = PlayerPrefs.GetInt(highScoreKey);
+        scoreText.text = "Score : " + score;
+    }
+    void Update()
+    {
+        PlayerPrefs.SetInt(highScoreKey, score);
     }
     public void AddPoints(int pointsIn)
     {
@@ -76,7 +83,7 @@ public class LevelController : MonoBehaviour
             dialog = DialogChop(dialog);
         dialogGO.SetActive(true);
         StartCoroutine(Fader(true));
-        dialogGO.transform.position = new Vector3(talker.transform.position.x, talker.transform.position.y + 1.0f, talker.transform.position.z);
+        dialogGO.transform.position = new Vector3(talker.transform.position.x + offSetPosition.x, talker.transform.position.y + offSetPosition.y, talker.transform.position.z);
         dialogGO.transform.SetParent(talker.transform);
         //    StartCoroutine(FlipChecker());
         StartCoroutine(AnimateText(dialog));
