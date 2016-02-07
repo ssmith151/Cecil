@@ -10,6 +10,7 @@ public class PlayerControl : MonoBehaviour
     public bool jump = false;               // Condition for whether the player should jump.
     public GameObject wallGOCheck;          // GameObject to collect the reference to get transform, for walls ya know
     public GameObject levelControlGO;
+    public GameObject mobileControls;
     public Collider2D triggerCollider;
     public float moveForce;          // Amount of force added to move the player left and right.
     public float maxSpeed;             // The fastest the player can travel in the x axis.
@@ -52,9 +53,22 @@ public class PlayerControl : MonoBehaviour
     public bool enemyBounce;
     private bool invulnerable;
     private bool alive;
+    private float h = 0.0f;
+    private Button leftButton;
+    private Button rightButton;
 
     void Awake()
     {
+
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
+        mobileControls.SetActive(false);
+#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+        mobileControls.SetActive(true);
+        leftButton = GameObject.Find("MobileLeftButton").GetComponent<Button>();
+        rightButton = GameObject.Find("MobileRightButton").GetComponent<Button>();
+#endif
+
+
         enemyBounce = false;
         alive = true;
         characterRender = GameObject.Find("PlayerBody").GetComponent<SpriteRenderer>();
@@ -105,13 +119,32 @@ public class PlayerControl : MonoBehaviour
         // If the jump button is pressed and the player is grounded then the player should jump.
         if (Input.GetButtonDown("Jump") && grounded)
             jump = true;
+        
     }
-
+    public void Jump()
+    {
+        if (grounded)
+            jump = true;
+    }
+    public void Left()
+    {
+        h = -1;
+    }
+    public void Right()
+    {
+        h = 1;
+    }
+    public void Still()
+    {
+        h = 0;
+    }
     void FixedUpdate()
     {
+        
         // Cache the horizontal input.
-        float h = Input.GetAxis("Horizontal");
-        // The Speed animator parameter is set to the absolute value of the horizontal input.
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
+        h = Input.GetAxis("Horizontal");
+#endif
         if (groundedLastFrame)
         {
             grounded = groundSpace.IsTouchingLayers(groundLayer);

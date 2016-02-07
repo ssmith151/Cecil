@@ -276,7 +276,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.61, y: 1.57, z: 0}
+  m_LocalPosition: {x: -18.55, y: 1.8, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 446010}
@@ -469,7 +469,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0.03, y: -0.18}
   serializedVersion: 2
-  m_Radius: 0.215
+  m_Radius: 0.205
 --- !u!58 &5816850
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -481,7 +481,7 @@ CircleCollider2D:
   m_Material: {fileID: 6200000, guid: 24ac79603fb61400588e37d9f6fe952a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0.03, y: -0.11}
+  m_Offset: {x: 0.03, y: -0.1}
   serializedVersion: 2
   m_Radius: 0.215
 --- !u!61 &6118742
@@ -509,7 +509,7 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: 24ac79603fb61400588e37d9f6fe952a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0.03, y: 0.12}
+  m_Offset: {x: 0.03, y: 0.125}
   serializedVersion: 2
   m_Size: {x: 0.43, y: 0.45}
 --- !u!82 &8249066
@@ -618,6 +618,7 @@ MonoBehaviour:
   jump: 0
   wallGOCheck: {fileID: 107648}
   levelControlGO: {fileID: 119432, guid: 6a423345f9f8ab8499bed0995aa5cb73, type: 2}
+  mobileControls: {fileID: 0}
   triggerCollider: {fileID: 6159358}
   moveForce: 100
   maxSpeed: 5
