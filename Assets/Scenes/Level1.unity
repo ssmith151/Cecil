@@ -32500,7 +32500,7 @@ LensFlare:
   m_GameObject: {fileID: 1597567187}
   m_Enabled: 1
   m_Flare: {fileID: 12100000, guid: 6174f2fe01a3c418090a23ec2f36e684, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.153}
   m_Brightness: 1
   m_FadeSpeed: 3
   m_IgnoreLayers:
@@ -32534,7 +32534,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1535931219
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 4652518e6d81d4af7b5cdc003b7ce01d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f2fe89f83740c471f962894f04d8b3be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

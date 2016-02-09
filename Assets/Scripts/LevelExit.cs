@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelExit : MonoBehaviour
 {
@@ -8,6 +9,12 @@ public class LevelExit : MonoBehaviour
     public bool slowfade;
     public GameObject blackOverlay;
     public int newLevelIndex;
+
+    void Start()
+    {
+        if (blackOverlay == null)
+            blackOverlay = GameObject.Find("BlackOveray");
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -31,13 +38,15 @@ public class LevelExit : MonoBehaviour
     {
         blackOverlay.SetActive(true);
         yield return StartCoroutine(ColorFade(1));
-        Application.LoadLevel(newLevelIndex);
+        SceneManager.LoadScene(newLevelIndex);
+        //Application.LoadLevel(newLevelIndex);
     }
     IEnumerator SlowFade()
     {
         blackOverlay.SetActive(true);
         yield return StartCoroutine(ColorFade(10));
-        Application.LoadLevel(newLevelIndex);
+        SceneManager.LoadScene(newLevelIndex);
+        //Application.LoadLevel(newLevelIndex);
     }
     IEnumerator ColorFade(float speed)
     {

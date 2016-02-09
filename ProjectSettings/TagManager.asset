@@ -7,7 +7,7 @@ TagManager:
   - ground
   - Crate
   - Enemy
-  - Wall
+  - Platform
   - Obstacle
   - Bullet
   - BombPickup

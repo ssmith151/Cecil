@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour {
 
@@ -95,7 +96,8 @@ public class MainMenuController : MonoBehaviour {
     IEnumerator DelayLoad(int levelNo)
     {
         yield return new WaitForSeconds(3.0f);
-        Application.LoadLevel(levelNo);
+        SceneManager.LoadScene(levelNo);
+        //Application.LoadLevel(levelNo);
     }
     public void OnExitGame()
     {

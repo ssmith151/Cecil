@@ -1176,7 +1176,7 @@ GameObject:
   - 61: {fileID: 109563181}
   - 114: {fileID: 109563180}
   m_Layer: 12
-  m_Name: GameObject
+  m_Name: WiggleTerrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9011,9 +9011,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.06656122}
   serializedVersion: 2
-  m_Size: {x: 2, y: 1.66}
+  m_Size: {x: 2, y: 1.793119}
 --- !u!212 &768040142
 SpriteRenderer:
   m_ObjectHideFlags: 0

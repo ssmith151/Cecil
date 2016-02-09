@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -54,8 +55,10 @@ public class PlayerControl : MonoBehaviour
     private bool invulnerable;
     private bool alive;
     private float h = 0.0f;
+    private float v = 0.0f;
     private Button leftButton;
     private Button rightButton;
+    private bool fallingThrough;
 
     void Awake()
     {
@@ -68,7 +71,7 @@ public class PlayerControl : MonoBehaviour
         rightButton = GameObject.Find("MobileRightButton").GetComponent<Button>();
 #endif
 
-
+        fallingThrough = false;
         enemyBounce = false;
         alive = true;
         characterRender = GameObject.Find("PlayerBody").GetComponent<SpriteRenderer>();
@@ -119,7 +122,7 @@ public class PlayerControl : MonoBehaviour
         // If the jump button is pressed and the player is grounded then the player should jump.
         if (Input.GetButtonDown("Jump") && grounded)
             jump = true;
-        
+
     }
     public void Jump()
     {
@@ -140,10 +143,11 @@ public class PlayerControl : MonoBehaviour
     }
     void FixedUpdate()
     {
-        
+
         // Cache the horizontal input.
 #if UNITY_STANDALONE || UNITY_WEBPLAYER
         h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
 #endif
         if (groundedLastFrame)
         {
@@ -159,7 +163,9 @@ public class PlayerControl : MonoBehaviour
         {
             // without next switch the character cannot switch directions in midair, possibly a good thing
             if (samePositionY == gameObject.transform.position.y)
-                h = 0;
+                gameObject.transform.Translate(0.0f, -0.02f, 0.0f);
+            //Debug.Log("stuck");
+            //h = 0;
             if (groundClose && !groundthrust)
             {
                 rb.AddForce(new Vector2(0.0f, rb.velocity.y * -2.0f));
@@ -216,7 +222,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetButton("Jump") && enemyBounce)
         {
             enemyBounce = false;
-            rb.AddForce(new Vector2(0f, jumpForce*1.5f));
+            rb.AddForce(new Vector2(0f, jumpForce * 1.5f));
         }
         samePositionY = gameObject.transform.position.y;
     }
@@ -400,7 +406,8 @@ public class PlayerControl : MonoBehaviour
         audSorce.PlayOneShot(audClips[3], 2.0f);
         yield return new WaitForSeconds(3);
         // ... and then reload the level.
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //Application.LoadLevel(Application.loadedLevel);
     }
     public void StopPlayer(int stopTime)
     {
@@ -414,6 +421,35 @@ public class PlayerControl : MonoBehaviour
         playerCanMove = false;
         yield return new WaitForSeconds(stopTime);
         playerCanMove = true;
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (v == -1 && !fallingThrough)
+        {
+            if (other.CompareTag("Platform"))
+            {
+                fallingThrough = true;
+                anim.SetBool("fallThrough", true);
+                foreach (Collider2D col in gameObject.GetComponents<Collider2D>())
+                {
+                    col.isTrigger = true;
+                }
+            }
+        }
+    }
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (fallingThrough && other.CompareTag("Platform"))
+        {
+            fallingThrough = false;
+            anim.SetBool("fallThrough", false);
+            foreach (Collider2D col in gameObject.GetComponents<Collider2D>())
+            {
+                if (col != groundSpace) 
+                    col.isTrigger = false;
+            }
+        }
     }
 }
 //	public IEnumerator Taunt()
